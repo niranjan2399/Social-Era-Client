@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
+
+.navbar {
+  width: 100%;
+  height: 5rem;
+  background-color: rgba(0, 0, 0, 0.904);
+  box-shadow: 0 0 1rem gray;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-inline: 1.5rem;
+
+  nav {
+    display: flex;
+  }
+
+  .link {
+    list-style: none;
+    position: relative;
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: white;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    z-index: 1;
+    mix-blend-mode: difference;
+    font-family: "Ubuntu", sans-serif;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+
+    &:not(:last-child){
+      margin-right: .5rem;
+    }
+
+    &:after {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      background-color: gray;
+      transition: all 200ms ease;
+    }
+
+    &:hover {
+      color: black;
+      &:after{
+        height: 100%;
+      }
+    }
+  }
+}
