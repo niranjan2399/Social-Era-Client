@@ -1,5 +1,5 @@
 import React from 'react'
-import './Register.scss'
+import './register.scss'
 
 function Register() {
 	function register(e) {

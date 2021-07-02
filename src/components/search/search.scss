@@ -1,0 +1,19 @@
+.searchIcon {
+  color: white;
+  transform: scale(1.1);
+}
+
+.search {
+  @media (max-width: 768px) {
+    position: relative;
+  }
+
+  input {
+    @media (max-width: 768px) {
+      position: absolute;
+	  top: 5rem;
+	  width: 100vw;
+	  right: -4.3125rem;
+    }
+  }
+}
