@@ -1,8 +1,10 @@
 .left_section {
+  width: 100%;
   height: calc(100vh - 3.5rem);
   padding-block: 1rem;
   background-color: #40407a;
   overflow-y: scroll;
+  margin-top: 3.5rem;
 
   .tag {
     display: flex;
