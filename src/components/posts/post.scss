@@ -3,6 +3,7 @@
   border: 2px solid #40407a;
 	border-radius: 5px;
   padding: 1rem;
+  box-shadow: 0 0 8px #2c2c54e0;
 
   .top {
     display: flex;
@@ -17,6 +18,7 @@
       }
 
       .username {
+        font-size: .875rem;
         margin-right: 0.6rem;
         font-weight: 600;
         cursor: pointer;
@@ -37,6 +39,7 @@
     margin-top: 1rem;
     font-size: 0.85rem;
     .postImage {
+      max-height: 5rem;
     }
   }
 

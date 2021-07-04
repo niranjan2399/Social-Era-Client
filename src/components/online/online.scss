@@ -1,0 +1,82 @@
+.online {
+  position: fixed;
+  bottom: 0;
+  width: 19rem;
+  right: 5rem;
+  max-height: 20rem;
+  box-shadow: 0 0 5px #2c2c54;
+  background-color: #40407a;
+  color: white;
+  font-size: 0.875rem;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #2c2c54;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+    }
+    p {
+      padding: 1rem;
+    }
+
+    .reveal_friends {
+      margin-right: 1rem;
+      transition: all 200ms cubic-bezier(1, 0, 0, 1);
+    }
+  }
+
+  .friends_online {
+    display: none;
+    margin-top: 0.8rem;
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+    margin-inline: 0.2rem;
+
+    &:last-of-type {
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+    }
+
+    .friend_div {
+      display: flex;
+      align-items: center;
+      padding-block: 0.6rem;
+      padding-inline: 0.8rem;
+
+      // &:hover {
+      //   background-color: #f5ebd4;
+      //   border-radius: 5px;
+      // }
+
+      .profile_pic {
+        position: relative;
+        .image {
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+          margin-right: 0.5rem;
+          background-color: #2c2c54;
+        }
+
+        .indicator {
+          position: absolute;
+          width: 0.7rem;
+          height: 0.7rem;
+          border-radius: 50%;
+          background-color: green;
+          top: 0.1rem;
+          right: 0.4rem;
+          border: 2px solid white;
+        }
+      }
+    }
+  }
+}

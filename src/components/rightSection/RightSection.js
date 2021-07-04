@@ -1,9 +1,11 @@
 import React from 'react'
+import Online from '../online/Online'
+import './rightSection.scss'
 
 function RightSection() {
 	return (
-		<div>
-			right
+		<div className='right_section'>
+			<Online />
 		</div>
 	)
 }
