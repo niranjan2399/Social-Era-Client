@@ -1,4 +1,7 @@
 .feed {
-  margin-top: 3.5rem;
-  margin-left: 19.5rem;
+  margin-inline: 2rem;
+
+  @media (max-width: 1024px) {
+    margin-inline: 1rem;
+  }
 }

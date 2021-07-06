@@ -1,7 +1,7 @@
 .post {
-  margin: 1.5rem;
-  border: 2px solid #40407a;
-	border-radius: 5px;
+  margin-bottom: 1.5rem;
+  border: 2px solid #706fd3;
+  border-radius: 5px;
   padding: 1rem;
   box-shadow: 0 0 8px #2c2c54e0;
 
@@ -18,7 +18,7 @@
       }
 
       .username {
-        font-size: .875rem;
+        font-size: 0.875rem;
         margin-right: 0.6rem;
         font-weight: 600;
         cursor: pointer;
@@ -36,10 +36,22 @@
   }
 
   .mid {
+    display: flex;
+    flex-direction: column;
     margin-top: 1rem;
     font-size: 0.85rem;
+    .text {
+      margin-bottom: 1.5rem;
+    }
+
     .postImage {
-      max-height: 5rem;
+      width: fit-content;
+      margin-inline: auto;
+      img {
+        object-fit: contain;
+        max-width: 100%;
+        max-height: 25rem;
+      }
     }
   }
 

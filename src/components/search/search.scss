@@ -19,6 +19,8 @@
     padding-inline: 1rem;
     background-color: #40407a;
     border: 1px solid #40407a;
+    box-shadow: 0 0 0.8rem rgb(37, 37, 37);
+    border-bottom: 1px solid #ffb142;
   }
 
   .searchIconDiv {
@@ -30,6 +32,15 @@
       height: 2rem;
       display: grid;
       margin-left: 1rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ffb042de;
+
+        .searchIcon {
+          color: white;
+        }
+      }
     }
 
     .searchIcon {
@@ -41,7 +52,7 @@
 
       @media (min-width: 768px) {
         margin-left: 0.25rem;
-        margin-top: .2rem;
+        margin-top: 0.2rem;
       }
     }
   }

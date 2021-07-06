@@ -2,19 +2,24 @@
 
 .navbar {
   width: 100%;
+  position: sticky;
+  top: 0;
   height: 3.5rem;
   background-color: #2c2c54;
-  box-shadow: 0 0 .8rem rgb(37, 37, 37);
+  box-shadow: 0 0 0.8rem rgb(37, 37, 37);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: 1rem;
-  position: fixed;
+  padding-inline: 1.5rem;
   z-index: 1;
+  border-bottom: 1px solid #ffb142;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1023px) {
     padding-inline: 2rem;
-    border-bottom: 1px solid #ffb142;
+  }
+
+  @media (max-width: 767px) {
+    padding-inline: 1rem;
   }
 
   .logo {
@@ -36,7 +41,7 @@
     display: flex;
     align-items: center;
 
-    @media (min-width: 768px) {
+    @media (min-width: 479px) {
       display: none;
     }
 
@@ -117,6 +122,12 @@
   @media (min-width: 768px) {
     justify-content: flex-end;
     flex: 4;
+  }
+
+  @media (max-width: 767px) {
+    .notification_div{
+      margin: 0;
+    }
   }
 
   .person_div,

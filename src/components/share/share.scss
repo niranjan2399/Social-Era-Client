@@ -4,7 +4,7 @@
   height: 10rem;
   border: 2px solid #aaa69d;
   border-radius: 5px;
-  margin: 1.5rem;
+  margin-block: 1.5rem;
   padding: 1rem;
   box-shadow: 0 0 0.4rem #40407a;
 	background-color: rgba(245, 222, 179, 0.055);
@@ -50,6 +50,12 @@
         display: flex;
         align-items: center;
         margin-right: 0.75rem;
+
+        @media (max-width: 480px) {
+          span{
+            display: none;
+          }
+        }
       }
 
       .photoIcon {
