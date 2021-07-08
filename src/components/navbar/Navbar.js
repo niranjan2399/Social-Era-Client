@@ -24,10 +24,12 @@ function Navbar() {
       </div>
       <SearchBar />
       <div className="right">
-        <div className="account_div">
-          <AccountCircle className="account" />
-          <div className="username">niranjan</div>
-        </div>
+        <Link to="/timeline" className="link_timeline">
+          <div className="account_div">
+            <AccountCircle className="account" />
+            <div className="username">niranjan</div>
+          </div>
+        </Link>
         <div className="person_div">
           <Person className="person" />
           <div>1</div>

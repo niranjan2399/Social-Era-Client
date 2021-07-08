@@ -16,4 +16,24 @@
 
 body {
   font-family: "Ubuntu", sans-serif;
+  background-color: rgba(128, 128, 128, 0.027);
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #2a2a5a;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ffb142;
+  border-radius: 3px;
+
+  &:hover{
+    background-color: #cc8e35;
+  }
+}
+

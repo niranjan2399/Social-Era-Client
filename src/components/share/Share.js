@@ -19,7 +19,7 @@ function Share() {
         <div className="option">
           <div>
             <PhotoLibrary className="photoIcon" />
-            <span>Photo or Video</span>
+            <span>Photo/Video</span>
           </div>
           <div>
             <Label className="labelIcon" />

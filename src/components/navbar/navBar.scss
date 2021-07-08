@@ -125,7 +125,7 @@
   }
 
   @media (max-width: 767px) {
-    .notification_div{
+    .notification_div {
       margin: 0;
     }
   }
@@ -165,39 +165,48 @@
     }
   }
 
-  .account_div {
-    margin-right: 1rem;
-    @media (min-width: 768px) {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      width: fit-content;
-      height: 2.2rem;
-      padding-inline: 0.35rem;
-      border-radius: 1.5rem;
-      transition: all 200ms cubic-bezier(1, 0, 0, 1);
+  .link_timeline {
+    text-decoration: none;
+    color: white;
 
-      &:hover {
-        background-color: #d1ccc02a;
+    .account_div {
+      margin-right: 1rem;
+
+      &:active{
+        background-color: #cc8e35;
+      }
+      @media (min-width: 768px) {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: fit-content;
+        height: 2.2rem;
+        padding-inline: 0.35rem;
+        border-radius: 1.5rem;
+        transition: all 200ms cubic-bezier(1, 0, 0, 1);
+
+        &:hover {
+          background-color: #d1ccc02a;
+          cursor: pointer;
+        }
+      }
+
+      .account {
+        transform: scale(1.4);
         cursor: pointer;
+        @media (max-width: 767px) {
+          margin-top: 0.2rem;
+        }
       }
-    }
 
-    .account {
-      transform: scale(1.4);
-      cursor: pointer;
-      @media (max-width: 767px) {
-        margin-top: 0.2rem;
-      }
-    }
+      .username {
+        text-transform: capitalize;
+        font-size: 0.875rem;
+        padding-inline: 0.6rem;
 
-    .username {
-      text-transform: capitalize;
-      font-size: 0.875rem;
-      padding-inline: 0.6rem;
-
-      @media (max-width: 767px) {
-        display: none;
+        @media (max-width: 767px) {
+          display: none;
+        }
       }
     }
   }
