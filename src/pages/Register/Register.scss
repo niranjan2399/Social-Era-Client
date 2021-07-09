@@ -1,55 +1,28 @@
-.register {
+.register{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 40%;
-  height: 25rem;
-  margin-top: 5rem;
-  margin-inline: auto;
-  border: 2px solid black;
+  width: 100%;
 
-  h2 {
-    margin-top: 1rem;
-    text-transform: uppercase;
-  }
+  form{
+   display: grid; 
+    grid-template-rows: 1fr 1fr 1fr 1fr 1.2fr 1fr;
+    gap: 1rem;
+    width: 65%;
+    margin-bottom: 1rem;
 
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 12rem;
-    margin-top: 2rem;
-
-    input {
-      border: none;
-      border-bottom: 2px solid blue;
-      margin-bottom: 1rem;
+    input{
+      width: 100%;
       padding-inline: .5rem;
-      padding-block: 0.6rem;
+      border: none;
+      border-bottom: 2px solid #2c2c54;
 
-      &:focus {
-        outline: none;
+      &:last-of-type{
+        margin-bottom: .5rem;
       }
-    }
 
-    button {
-      width: 8rem;
-      padding-inline: 2rem;
-      margin-top: 1rem;
-      padding-block: 0.8rem;
-      border-radius: 2rem;
-      border: 1px solid blue;
-      background-color: transparent;
-      margin-inline: auto;
-      transition: all 200ms linear;
-      font-weight: 700;
-      letter-spacing: 0.05rem;
-      cursor: pointer;
-
-      &:hover {
-        background-color: rgba(45, 45, 211, 0.685);
-        width: 9rem;
-        color: white;
+      &:focus{
+        outline: none;
       }
     }
   }

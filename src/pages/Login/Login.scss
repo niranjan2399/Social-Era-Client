@@ -1,0 +1,90 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #40407a;
+
+  .left_wrapper {
+    display: flex;
+    margin-inline: auto;
+    width: 70%;
+    height: 70%;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 3rem #2c2c54, 0 0 7rem #7202f341;
+
+    .left {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+
+      h1 {
+        font-family: "Press Start 2P", cursive;
+        color: #2c2c54;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
+
+      .login_form {
+        display: grid;
+        grid-template-rows: 1fr 1fr 2fr;
+        gap: 1rem;
+        align-items: center;
+        margin-inline: auto;
+        width: 65%;
+
+        input {
+          width: 100%;
+          padding: 0.5rem;
+          border: none;
+          border-bottom: 2px solid #2c2c54;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      button {
+        width: fit-content;
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+        padding-block: 0.4rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        border: 2px solid #2c2c54;
+        cursor: pointer;
+
+        &:hover {
+          width: calc(fit-content + 1rem);
+        }
+
+        &:last-of-type {
+          margin-block: 0;
+        }
+      }
+
+      a {
+        font-size: 0.8rem;
+        text-decoration: none;
+        margin-bottom: 1rem;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+	input::placeholder{
+		opacity: .7;
+	}
+}
