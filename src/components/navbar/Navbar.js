@@ -24,7 +24,7 @@ function Navbar() {
       </div>
       <SearchBar />
       <div className="right">
-        <Link to="/timeline" className="link_timeline">
+        <Link to="/profile" className="link_timeline">
           <div className="account_div">
             <AccountCircle className="account" />
             <div className="username">niranjan</div>

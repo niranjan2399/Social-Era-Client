@@ -1,20 +1,45 @@
 import "./App.scss";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import Home from "./pages/home/Home";
-// import Login from "./pages/login/Login";
-// import Register from "./pages/register/Register";
-import Timeline from './pages/timeline/Timeline'
+import Profile from "./pages/profile/Profile";
 import LoginRegister from "./pages/wrapper/LoginRegister";
+import { AuthContext } from "./authContext/AuthContext";
+import { useContext } from "react";
 
 function App() {
+  const { user } = useContext(AuthContext);
+
   return (
     <>
       <Router>
         <Switch>
-          <Route path="/" exact render={() => <Home />} />
-          <Route path="/timeline" exact render={() => <Timeline />} />
-          <Route path="/register" exact render={() => <LoginRegister />} />
-          <Route path="/login" exact render={() => <LoginRegister login/>} />
+          <Route
+            path="/"
+            exact
+            render={() => (user ? <Home /> : <LoginRegister login />)}
+          />
+          <Route
+            path="/profile"
+            exact
+            render={() => (user ? <Profile /> : <LoginRegister login />)}
+          />
+          <Route
+            path="/register"
+            exact
+            render={() => (user ? <Redirect to="/" /> : <LoginRegister />)}
+          />
+          <Route
+            path="/login"
+            exact
+            render={() =>
+              user ? <Redirect to="/" /> : <LoginRegister login />
+            }
+          />
         </Switch>
       </Router>
     </>

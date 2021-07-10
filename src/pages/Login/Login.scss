@@ -55,6 +55,8 @@
       }
       button {
         width: fit-content;
+        min-width: 5rem;
+        height: 2.25rem;
         margin-inline: auto;
         padding-inline: 1.25rem;
         padding-block: 0.4rem;
@@ -63,8 +65,9 @@
         border: 2px solid #2c2c54;
         cursor: pointer;
 
-        &:hover {
-          width: calc(fit-content + 1rem);
+        &:disabled{
+          cursor: none;
+          opacity: .9;
         }
 
         &:last-of-type {

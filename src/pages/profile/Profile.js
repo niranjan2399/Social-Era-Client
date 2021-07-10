@@ -1,11 +1,11 @@
 import React from "react";
 import Feed from "../../components/feed/Feed";
-import "./timeline.scss";
+import "./profile.scss";
 import { Panorama, AddAPhoto } from "@material-ui/icons";
 import TimelineLeftSection from "../../components/timelineLeftSection/TimelineLeftSection";
 import Navbar from "../../components/navbar/Navbar";
 
-function Timeline() {
+function Profile() {
   return (
     <>
       <Navbar />
@@ -32,4 +32,4 @@ function Timeline() {
   );
 }
 
-export default Timeline;
+export default Profile;

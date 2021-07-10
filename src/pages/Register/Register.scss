@@ -1,29 +1,58 @@
-.register{
+.register {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 
-  form{
-   display: grid; 
-    grid-template-rows: 1fr 1fr 1fr 1fr 1.2fr 1fr;
+  form {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1.2fr 1fr;
     gap: 1rem;
     width: 65%;
     margin-bottom: 1rem;
+    margin-inline: auto;
 
-    input{
+    input {
       width: 100%;
-      padding-inline: .5rem;
+      padding-inline: 0.5rem;
       border: none;
       border-bottom: 2px solid #2c2c54;
 
-      &:last-of-type{
-        margin-bottom: .5rem;
-      }
-
-      &:focus{
+      &:focus {
         outline: none;
       }
     }
+
+    .genderWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin-top: .5rem;
+
+      span {
+        color: black;
+        opacity: .9;
+        font-size: .875rem;
+      }
+
+      .gender {
+        display: flex;
+        width: 50%;
+        align-items: center;
+
+        &:first-of-type{
+          margin-left: 1rem;
+        }
+
+        input {
+          margin: 0;
+          width: 1.5rem;
+        }
+      }
+    }
+  }
+
+  .loginLink{
+    margin-inline: auto;
   }
 }

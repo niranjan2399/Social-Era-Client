@@ -5,9 +5,9 @@ import data from "./toRender";
 function LeftSection() {
   return (
     <div className="left_section">
-      {data.map((list) => {
+      {data.map((list,i) => {
         return (
-          <div className="tag">
+          <div key={i} className="tag">
             <list.logo />
             <span>{list.text}</span>
           </div>
