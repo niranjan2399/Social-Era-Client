@@ -31,7 +31,7 @@ function Login() {
   };
 
   return (
-    <>
+    <div className='login'>
       <form onSubmit={handleLogin} className="login_form">
         <input
           type="email"
@@ -56,7 +56,7 @@ function Login() {
       <Link to="/register">
         <button>Create a new Account</button>
       </Link>
-    </>
+    </div>
   );
 }
 

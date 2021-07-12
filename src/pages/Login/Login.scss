@@ -9,15 +9,15 @@
     display: flex;
     margin-inline: auto;
     width: 70%;
-    height: 70%;
+    height: 75%;
     padding: 1.5rem;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 0 0 3rem #2c2c54, 0 0 7rem #7202f341;
+    box-shadow: 0 0 8rem #706fd3;
 
     .left {
       display: flex;
-      flex: 1;
+      flex: 1.5;
       flex-direction: column;
       justify-content: center;
 
@@ -34,44 +34,56 @@
       justify-content: center;
       flex: 1;
 
-      .login_form {
-        display: grid;
-        grid-template-rows: 1fr 1fr 2fr;
-        gap: 1rem;
+      .login {
+        display: flex;
+        flex-direction: column;
         align-items: center;
-        margin-inline: auto;
-        width: 65%;
+        width: 90%;
+        background-color: #d3cfc7af;
+        border-radius: 5px;
+        justify-content: center;
+        min-height: 90%;
 
-        input {
-          width: 100%;
-          padding: 0.5rem;
-          border: none;
-          border-bottom: 2px solid #2c2c54;
+        .login_form {
+          display: grid;
+          grid-template-rows: 1fr 1fr 2fr;
+          gap: 1rem;
+          align-items: center;
+          margin-inline: auto;
+          width: 65%;
 
-          &:focus {
-            outline: none;
+          input {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            border-bottom: 2px solid #2c2c54;
+            background-color: transparent;
+
+            &:focus {
+              outline: none;
+            }
           }
         }
-      }
-      button {
-        width: fit-content;
-        min-width: 5rem;
-        height: 2.25rem;
-        margin-inline: auto;
-        padding-inline: 1.25rem;
-        padding-block: 0.4rem;
-        border-radius: 0.5rem;
-        margin-bottom: 1rem;
-        border: 2px solid #2c2c54;
-        cursor: pointer;
+        button {
+          width: fit-content;
+          min-width: 5rem;
+          height: 2.25rem;
+          margin-inline: auto;
+          padding-inline: 1.25rem;
+          padding-block: 0.4rem;
+          border-radius: 0.5rem;
+          margin-bottom: 1rem;
+          border: 2px solid #2c2c54;
+          cursor: pointer;
 
-        &:disabled{
-          cursor: none;
-          opacity: .9;
-        }
+          &:disabled {
+            cursor: none;
+            opacity: 0.9;
+          }
 
-        &:last-of-type {
-          margin-block: 0;
+          &:last-of-type {
+            margin-block: 0;
+          }
         }
       }
 
@@ -87,7 +99,7 @@
     }
   }
 
-	input::placeholder{
-		opacity: .7;
-	}
+  input::placeholder {
+    color: #84817a;
+  }
 }

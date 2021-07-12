@@ -24,7 +24,7 @@ function App() {
             render={() => (user ? <Home /> : <LoginRegister login />)}
           />
           <Route
-            path="/profile"
+            path="/profile/:id"
             exact
             render={() => (user ? <Profile /> : <LoginRegister login />)}
           />

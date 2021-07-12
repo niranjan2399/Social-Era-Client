@@ -172,7 +172,7 @@
     .account_div {
       margin-right: 1rem;
 
-      &:active{
+      &:active {
         background-color: #cc8e35;
       }
       @media (min-width: 768px) {
@@ -188,6 +188,18 @@
         &:hover {
           background-color: #d1ccc02a;
           cursor: pointer;
+        }
+      }
+
+      .profile_pic {
+        width: 1.7rem;
+        height: 1.7rem;
+        border-radius: 50%;
+        background-color: white;
+
+        img {
+          object-fit: contain;
+          width: 100%;
         }
       }
 

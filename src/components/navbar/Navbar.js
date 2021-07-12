@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./navBar.scss";
 import SearchBar from "../search/SearchBar";
-import { AccountCircle, Person } from "@material-ui/icons";
+import { Person } from "@material-ui/icons";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import { AuthContext } from "../../authContext/AuthContext";
 
 function Navbar() {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="navbar">
       <div className="left">
@@ -24,10 +28,19 @@ function Navbar() {
       </div>
       <SearchBar />
       <div className="right">
-        <Link to="/profile" className="link_timeline">
+        <Link to={`/profile/${user._id}`} className="link_timeline">
           <div className="account_div">
-            <AccountCircle className="account" />
-            <div className="username">niranjan</div>
+            <div className="profile_pic">
+              <img
+                src={
+                  user.profilePicture
+                    ? PF + user.profilePicture
+                    : PF + "noProfilePic.png"
+                }
+                alt="ProfilePic"
+              />
+            </div>
+            <div className="username">{user.firstName}</div>
           </div>
         </Link>
         <div className="person_div">

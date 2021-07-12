@@ -1,6 +1,8 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import "./register.scss";
+import { ErrorOutline } from "@material-ui/icons";
+import axios from "axios";
 
 function Register() {
   const firstName = useRef();
@@ -8,28 +10,60 @@ function Register() {
   const email = useRef();
   const password = useRef();
   const cfPassword = useRef();
+  const [isError, setIsError] = useState(false);
+  const [gender, setGender] = useState("");
+  const history = useHistory();
 
-  function register(e) {
+  const register = async (e) => {
     e.preventDefault();
-		console.log(firstName.current.value, lastName.current.value)
-  }
+
+    if (password.current.value === cfPassword.current.value) {
+      const data = {
+        lastName: lastName.current.value,
+        firstName: firstName.current.value,
+        email: email.current.value,
+        password: password.current.value,
+        gender: gender,
+      };
+      try {
+        const res = await axios.post("/auth/register", data);
+        if (res.status === 200) {
+          history.push("/login");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      setIsError(true);
+    }
+  };
   return (
     <div className="register">
+      {isError && (
+        <span className="error">
+          <ErrorOutline
+            style={{ marginRight: ".25rem", fontSize: ".875rem" }}
+          />
+          Passwords do not match!
+        </span>
+      )}
       <form onSubmit={register}>
-        <input
-          type="text"
-          id="first_name"
-          required
-          ref={firstName}
-          placeholder="First Name"
-        />
-        <input
-          type="text"
-          id="last_name"
-          required
-          ref={lastName}
-          placeholder="Last Name"
-        />
+        <fieldset>
+          <input
+            type="text"
+            id="first_name"
+            required
+            ref={firstName}
+            placeholder="First Name"
+          />
+          <input
+            type="text"
+            id="last_name"
+            required
+            ref={lastName}
+            placeholder="Last Name"
+          />
+        </fieldset>
         <input
           type="email"
           id="email"
@@ -42,7 +76,7 @@ function Register() {
           id="password"
           required
           ref={password}
-					minLength='6'
+          minLength="6"
           placeholder="Password"
         />
         <input
@@ -50,32 +84,34 @@ function Register() {
           id="confirm_password"
           required
           placeholder="Confirm Password"
-					minLength='6'
+          minLength="6"
           ref={cfPassword}
         />
-        <div className="genderWrapper">
-          <span>Gender</span>
-          <div className="gender">
+        <fieldset className="genderWrapper">
+          <legend className="legend">Gender</legend>
+          <label className="gender">
             <input
               type="radio"
               name="gender"
               id="gender_male"
               required
-              value="male"
+              onChange={() => setGender("Male")}
+              checked={gender === "Male"}
             />
-            <span>Male</span>
-          </div>
-          <div className="gender">
+            Male
+          </label>
+          <label className="gender">
             <input
               type="radio"
               name="gender"
               id="gender_female"
               required
-              value="female"
+              onChange={() => setGender("Female")}
+              checked={gender === "Female"}
             />
-            <span>Female</span>
-          </div>
-        </div>
+            Female
+          </label>
+        </fieldset>
         <button>Register</button>
         <Link className="loginLink" to="/login">
           Already a user?
