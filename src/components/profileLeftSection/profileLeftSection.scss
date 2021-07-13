@@ -1,0 +1,101 @@
+.profile_left {
+  margin-inline: 2rem;
+
+  @media (max-width: 1024px) {
+    margin: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    margin-top: 2.2rem;
+  }
+
+  h4 {
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #2c2c54;
+  }
+
+  .followOption {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+
+    button {
+      display: flex;
+      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      background-color: #474787;
+      border: none;
+      border-radius: 3px;
+      padding: 0.4rem;
+      cursor: pointer;
+
+      span{
+        margin-right: .25rem;
+      }
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      &:last-of-type {
+        background-color: #cc8e35;
+      }
+    }
+  }
+
+  .details {
+    display: flex;
+    align-items: center;
+    margin-block: 0.5rem;
+
+    .logo {
+      color: #2c2c54;
+    }
+
+    span {
+      margin-inline: 0.2rem;
+    }
+  }
+
+  .friends_div {
+    margin-top: 3rem;
+    width: 100%;
+
+    .followings {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      align-items: center;
+      gap: 1rem;
+
+      .followings_user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 5rem;
+        height: 6.25rem;
+        font-size: 0.85rem;
+        border-radius: 5px;
+        text-decoration: none;
+        color: black;
+
+        picture {
+          width: 5rem;
+          height: 5rem;
+          overflow: hidden;
+
+          img {
+            object-fit: contain;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

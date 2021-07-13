@@ -25,7 +25,7 @@ function Feed({ profileUserId }) {
 
   return (
     <div className="feed">
-      <Share />
+      {profileUserId ? user._id === profileUserId && <Share /> : <Share />}
       {posts.map((post) => {
         return <Post key={post._id} post={post} />;
       })}
