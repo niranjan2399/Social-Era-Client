@@ -60,17 +60,12 @@ function Post({ post }) {
         </div>
       </div>
       <div className="mid">
-        <span className="text">{post.desc}</span>
-        <picture className="postImage">
-          <img
-            src={
-              post.img
-                ? PF + post.img
-                : "https://images.unsplash.com/photo-1545284234-f4821630060b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fHNwbGFzaHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
-            }
-            alt=""
-          />
-        </picture>
+        {post.desc && <span className="text">{post.desc}</span>}
+        {post.img && (
+          <picture className="postImage">
+            <img src={PF + post.img} alt="" />
+          </picture>
+        )}
       </div>
       <div className="bottom">
         <div className="left">

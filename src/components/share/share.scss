@@ -1,18 +1,19 @@
 .share {
   display: flex;
   flex-direction: column;
-  height: 10rem;
+  height: fit-content;
+  max-height: 50rem;
   border: 2px solid #aaa69d;
   border-radius: 5px;
   margin-block: 1.5rem;
   padding: 1rem;
   box-shadow: 0 0 0.4rem #40407a;
   background-color: rgba(245, 222, 179, 0.055);
-
+  
   .input_text {
     display: flex;
     align-items: center;
-
+    
     .profile_pic {
       width: 2.875rem;
       height: 2.875rem;
@@ -20,32 +21,64 @@
       border-radius: 50%;
       background-color: white;
       margin-right: 0.8rem;
-
+      
       img {
         object-fit: contain;
         width: 100%;
       }
     }
-
+    
     input {
       border: none;
       width: 100%;
-      background-color: transparent;
-
+      padding-block: .5rem;
+      padding-inline: 1rem;
+      border-radius: 1rem;
+      background-color: white;
+      border: 1px solid #2c2c5449;
+      
       &:focus {
         outline: none;
       }
     }
   }
-
+  
   hr {
     margin-block: 1rem;
-    border: 1px solid #706fd3;
+    border: 1px solid #716fd349;
+  }
+  
+  .imagePreview {
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+    width: 100%;
+    
+    .image_div {
+      position: relative;
+      height: fit-content;
+      width: fit-content;
+      
+      img {
+        object-fit: contain;
+        max-height: 20rem;
+        max-width: 100%;
+      }
+
+      .cancel {
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        color: #2c2c54;
+        cursor: pointer;
+      }
+    }
   }
 
   .options {
     display: flex;
     justify-content: space-between;
+    margin-top: 0.75rem;
 
     .option {
       display: flex;
@@ -59,7 +92,7 @@
         border-radius: 2px;
 
         span {
-          font-size: 0.80rem;
+          font-size: 0.8rem;
         }
 
         &:hover {

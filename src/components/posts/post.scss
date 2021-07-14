@@ -58,12 +58,13 @@
     margin-top: 1rem;
     font-size: 0.85rem;
     .text {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .postImage {
       width: fit-content;
       margin-inline: auto;
+      margin-top: 0.5rem;
       img {
         object-fit: contain;
         max-width: 100%;
@@ -78,6 +79,7 @@
     margin-top: 1rem;
 
     .thumbUp {
+      font-size: 1.25rem;
       margin-right: 0.5rem;
       color: blue;
 
@@ -88,6 +90,7 @@
       }
     }
     .like {
+      font-size: 1.25rem;
       color: red;
       &:hover {
         filter: drop-shadow(0 2px 2px red);

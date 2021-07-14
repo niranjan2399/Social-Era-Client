@@ -5,6 +5,7 @@ import {
   LocationOn,
   Label,
   EmojiEmotions,
+  Cancel,
 } from "@material-ui/icons";
 import { AuthContext } from "../../authContext/AuthContext";
 import axios from "axios";
@@ -17,7 +18,7 @@ function Share() {
 
   const handleShare = async (e) => {
     e.preventDefault();
-    if (desc.current.value !== "") {
+    if (desc.current.value !== "" || file !== null) {
       const newPost = {
         desc: desc.current.value,
         userId: user._id,
@@ -63,6 +64,14 @@ function Share() {
         <input type="text" ref={desc} placeholder="What's on your mind?" />
       </div>
       <hr />
+      {file && (
+        <div className="imagePreview">
+          <div className="image_div">
+            <img src={URL.createObjectURL(file)} alt="" />
+            <Cancel className="cancel" onClick={() => setFile(null)} />
+          </div>
+        </div>
+      )}
       <form className="options" onSubmit={handleShare}>
         <div className="option">
           <label htmlFor="file">
