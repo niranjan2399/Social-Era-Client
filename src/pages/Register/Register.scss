@@ -3,9 +3,6 @@
   flex-direction: column;
   align-items: center;
   width: 90%;
-  min-height: 90%;
-  background-color: #d3cfc7af;
-  border-radius: 5px;
 
   .error {
     margin-top: 1rem;
@@ -18,22 +15,22 @@
   form {
     display: grid;
     grid-template-rows: 2.45fr 1fr 1fr 1fr 1.25fr 1fr 1fr;
-    gap: 1rem;
+    gap: .75rem;
     width: 75%;
     margin-block: 1rem;
     margin-inline: auto;
-
+    
     fieldset {
       display: grid;
       grid-template-rows: 1fr 1fr;
-      gap: 1rem;
+      gap: .75rem;
       border: none;
-
+      
       legend {
         margin-bottom: 0.5rem;
       }
     }
-
+    
     input {
       width: 100%;
       padding-inline: 0.5rem;
@@ -41,7 +38,7 @@
       border-bottom: 2px solid #2c2c54;
       background-color: transparent;
       color: #2c2c54;
-
+      
       &:focus {
         outline: none;
       }
@@ -73,5 +70,15 @@
 
   .loginLink {
     margin-inline: auto;
+  }
+
+  a {
+    font-size: 0.8rem;
+    text-decoration: none;
+    margin-bottom: 1rem;
+  
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

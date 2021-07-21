@@ -9,6 +9,15 @@ import { AuthContext } from "../../authContext/AuthContext";
 function Navbar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useContext(AuthContext);
+  const to_reveal = document.querySelector(".more_options");
+
+  const revealMore = (e) => {
+    if (to_reveal.hasAttribute("style")) {
+      to_reveal.removeAttribute("style");
+    } else {
+      to_reveal.setAttribute("style", "visibility: visible");
+    }
+  };
 
   return (
     <div className="navbar">
@@ -51,8 +60,13 @@ function Navbar() {
           <NotificationsIcon className="noti" />
           <div>2</div>
         </div>
-        <div className="more">
+        <div className="more" onClick={revealMore}>
           <i className="lzf7d6o1"></i>
+          <div className="more_options">
+            <ul>
+              <li>Logout</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
