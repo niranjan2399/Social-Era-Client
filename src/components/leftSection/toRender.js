@@ -1,7 +1,7 @@
 import {
   RssFeed,
   PlayCircleFilled,
-  Group,
+  Chat,
   Bookmark,
   Help,
   Event,
@@ -17,8 +17,8 @@ const data = [
     text: "Videos",
   },
   {
-    logo: Group,
-    text: "Groups",
+    logo: Chat,
+    text: "Chat",
   },
   {
     logo: Bookmark,

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./navBar.scss";
 import SearchBar from "../search/SearchBar";
 import { Person } from "@material-ui/icons";
@@ -9,13 +9,16 @@ import { AuthContext } from "../../authContext/AuthContext";
 function Navbar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useContext(AuthContext);
-  const to_reveal = document.querySelector(".more_options");
-
+  
   const revealMore = (e) => {
+    const to_reveal = document.querySelector(".more_options");
+    console.log(to_reveal);
     if (to_reveal.hasAttribute("style")) {
+      console.log("rm");
       to_reveal.removeAttribute("style");
     } else {
       to_reveal.setAttribute("style", "visibility: visible");
+      console.log("ad");
     }
   };
 
@@ -37,8 +40,15 @@ function Navbar() {
       </div>
       <SearchBar />
       <div className="right">
-        <Link to={`/profile/${user._id}`} className="link_timeline">
-          <div className="account_div">
+        <div className="link_timeline">
+          <NavLink
+            className="account_div"
+            to={`/profile/${user._id}`}
+            activeStyle={{
+              backgroundColor: "#d1ccc02a",
+              border: "1px solid yellow",
+            }}
+          >
             <div className="profile_pic">
               <img
                 src={
@@ -50,8 +60,8 @@ function Navbar() {
               />
             </div>
             <div className="username">{user.firstName}</div>
-          </div>
-        </Link>
+          </NavLink>
+        </div>
         <div className="person_div">
           <Person className="person" />
           <div>1</div>

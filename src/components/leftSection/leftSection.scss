@@ -29,6 +29,10 @@
     display: none;
   }
 
+  .chat_tag{
+    text-decoration: none;
+  }
+
   .tag {
     display: flex;
     align-items: center;
@@ -47,7 +51,7 @@
     }
 
     @media (max-width: 900px) {
-      padding-inline: .875rem;
+      padding-inline: 0.875rem;
     }
 
     span {
@@ -96,7 +100,7 @@
       }
 
       @media (max-width: 900px) {
-        padding-inline: .875rem;
+        padding-inline: 0.875rem;
       }
 
       &:hover {

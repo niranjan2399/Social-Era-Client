@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import "./login.scss";
+import "./Login.scss";
 import { AuthContext } from "../../authContext/AuthContext";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
@@ -31,25 +31,27 @@ function Login() {
   };
 
   return (
-    <div className='login'>
+    <div className="login">
       <form onSubmit={handleLogin} className="login_form">
         <input
           type="email"
           id="email"
           ref={email}
           required
+          autoComplete="username"
           placeholder="Email"
         />
         <input
           type="password"
           id="password"
           ref={password}
+          autoComplete="current-password"
           required
           minLength="6"
           placeholder="Password"
         />
         <button type="submit" disabled={isFetching}>
-          {isFetching ? <CircularProgress size='1rem' /> : 'Login'}
+          {isFetching ? <CircularProgress size="1rem" /> : "Login"}
         </button>
       </form>
       {/* <a href="">Forgot Password?</a> */}

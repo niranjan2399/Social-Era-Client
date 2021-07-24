@@ -1,0 +1,16 @@
+.container_chat {
+  width: 100%;
+  margin-top: 2.5rem;
+  height: calc(100vh - 6.25rem);
+
+  @media (min-width: 768px) {
+    padding-top: 0.25rem;
+    margin: 0;
+    height: calc(100vh - 3.75rem);
+  }
+
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+}

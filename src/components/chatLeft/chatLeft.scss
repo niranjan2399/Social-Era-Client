@@ -1,0 +1,55 @@
+.friend_chat {
+  height: 100%;
+
+  @media (min-width: 1024px) {
+    overflow-y: scroll;
+  }
+
+  .friend_div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 4.75rem;
+    background-color: peachpuff;
+    padding-inline: 1rem;
+    cursor: pointer;
+
+    .picture_friend {
+      width: 3.5rem;
+      height: 3.5rem;
+      background-color: aquamarine;
+      border-radius: 50%;
+    }
+
+    .details {
+      width: calc(100% - 5rem);
+
+      .friend_name {
+        margin-bottom: 0.325rem;
+        font-size: 1.125rem;
+        
+        span:hover{
+          text-decoration: underline;
+        }
+      }
+
+      .friend_status {
+        display: flex;
+        align-items: center;
+
+        .indicator {
+          width: 0.65rem;
+          height: 0.65rem;
+          background-color: green;
+          border-radius: 50%;
+          margin-right: 0.5rem;
+        }
+
+        .text {
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+}

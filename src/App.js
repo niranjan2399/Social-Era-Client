@@ -10,6 +10,7 @@ import Profile from "./pages/profile/Profile";
 import LoginRegister from "./pages/wrapper/LoginRegister";
 import { AuthContext } from "./authContext/AuthContext";
 import { useContext } from "react";
+import Messenger from "./pages/messenger/Messenger";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -32,6 +33,11 @@ function App() {
             path="/register"
             exact
             render={() => (user ? <Redirect to="/" /> : <LoginRegister />)}
+          />
+          <Route
+            path="/messenger"
+            exact
+            render={() => (user ? <Messenger /> : <Redirect to="/" />)}
           />
           <Route
             path="/login"
