@@ -55,7 +55,7 @@ function Login() {
         </button>
       </form>
       {/* <a href="">Forgot Password?</a> */}
-      <Link to="/register">
+      <Link to="/register" className='link_register'>
         <button>Create a new Account</button>
       </Link>
     </div>

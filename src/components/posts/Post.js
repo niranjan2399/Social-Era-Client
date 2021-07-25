@@ -3,7 +3,7 @@ import "./post.scss";
 import {
   MoreVert,
   ThumbUpAltOutlined,
-  FavoriteBorderOutlined,
+  ThumbUpAlt,
 } from "@material-ui/icons";
 import axios from "axios";
 import { format } from "timeago.js";
@@ -69,8 +69,11 @@ function Post({ post }) {
       </div>
       <div className="bottom">
         <div className="left">
-          <ThumbUpAltOutlined className="thumbUp" onClick={likeHandler} />
-          <FavoriteBorderOutlined className="like" onClick={likeHandler} />
+          {isLiked ? (
+            <ThumbUpAlt className="thumbUp" onClick={likeHandler} />
+          ) : (
+            <ThumbUpAltOutlined className="thumbUp" onClick={likeHandler} />
+          )}
           <span className="likeMessage">{likes} people liked it</span>
         </div>
         <div className="right">

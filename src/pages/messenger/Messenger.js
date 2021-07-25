@@ -10,7 +10,7 @@ function Messenger() {
       <Navbar />
       <div className="container_chat">
         <ChatLeft />
-        {/* <ChatBox /> */}
+        <ChatBox />
       </div>
     </>
   );

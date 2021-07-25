@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Feed from "../../components/feed/Feed";
 import "./profile.scss";
 import { Panorama, AddAPhoto } from "@material-ui/icons";
@@ -6,9 +6,11 @@ import ProfileLeftSection from "../../components/profileLeftSection/ProfileLeftS
 import Navbar from "../../components/navbar/Navbar";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../../authContext/AuthContext";
 
 function Profile() {
-  const [user, setUser] = useState(null);
+  const [profileUser, setUser] = useState(null);
+  const { user } = useContext(AuthContext);
   const profileId = useParams().id;
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -28,23 +30,26 @@ function Profile() {
         <div className="timeline_top">
           <picture className="coverImage"></picture>
           <div className="add_Image">
-            <Panorama className="panorama_Icon" />
+            {user._id === profileId && <Panorama className="panorama_Icon" />}
             <div className="userName">
-              <h2>{user && user.firstName + " " + user.lastName}</h2>
+              <h2>
+                {profileUser &&
+                  profileUser.firstName + " " + profileUser.lastName}
+              </h2>
             </div>
           </div>
           <div className="profile_pic">
-            {user && (
+            {profileUser && (
               <img
                 src={
-                  user.profilePicture
-                    ? PF + user.profilePicture
+                  profileUser.profilePicture
+                    ? PF + profileUser.profilePicture
                     : PF + "noProfilePic.png"
                 }
                 alt=""
               />
             )}
-            <AddAPhoto className="add_profilePic" />
+            {user._id === profileId && <AddAPhoto className="add_profilePic" />}
           </div>
         </div>
         <div className="timeline_bottom">

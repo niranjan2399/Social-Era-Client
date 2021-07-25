@@ -1,6 +1,6 @@
 import React from "react";
-import Login from "../login/Login";
-import Register from "../register/Register";
+import Login from "../../components/login/Login";
+import Register from "../../components/register/Register";
 import "./wrapper.scss";
 
 function LoginRegister({ login }) {

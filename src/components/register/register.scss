@@ -1,23 +1,26 @@
 .register {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 90%;
+  height: fit-content;
 
   .error {
-    margin-top: 1rem;
+    margin-top: .5rem;
     display: flex;
     align-items: center;
     color: red;
     font-size: 0.875rem;
+    margin-bottom: .5rem;
   }
 
   form {
     display: grid;
-    grid-template-rows: 2.45fr 1fr 1fr 1fr 1.25fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr 1fr 1fr 1.25fr 1fr 1fr;
     gap: .75rem;
     width: 75%;
-    margin-block: 1rem;
+    margin-block: auto;
     margin-inline: auto;
     
     fieldset {

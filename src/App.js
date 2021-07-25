@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
-import LoginRegister from "./pages/wrapper/LoginRegister";
+import LoginRegister from "./pages/LoginRegister/LoginRegister";
 import { AuthContext } from "./authContext/AuthContext";
 import { useContext } from "react";
 import Messenger from "./pages/messenger/Messenger";

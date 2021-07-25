@@ -5,18 +5,22 @@
   padding: 1rem;
   box-shadow: 0 0 8px #2c2c54e0;
   background-color: white;
-
+  
   .top {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
     .left {
-      flex: 1.5;
-
+      display: flex;
+      align-items: center;
+      
       .user_profile {
         display: flex;
         align-items: center;
         text-decoration: none;
         color: #2c2c54;
-
+        
         .profilePic {
           width: 2rem;
           height: 2rem;
@@ -24,28 +28,36 @@
           margin-right: 0.5rem;
           overflow: hidden;
           cursor: pointer;
-
+          
           img {
             width: 100%;
           }
         }
       }
-
+      
       .username {
         font-size: 0.875rem;
         margin-right: 0.6rem;
         font-weight: 600;
         cursor: pointer;
       }
-
+      
       .time {
         font-size: 0.75rem;
         color: rgb(85, 84, 84);
       }
     }
-
+    
     .right {
-      flex: 1;
+      width: 1.5rem;
+      height: 1.5rem;
+      cursor: pointer;
+      border-radius: 50%;
+
+      &:hover{
+        background-color: #2c2c5467;
+      }
+
       .more {
         color: black;
       }
@@ -78,36 +90,45 @@
     justify-content: space-between;
     margin-top: 1rem;
 
-    .thumbUp {
-      font-size: 1.25rem;
-      margin-right: 0.5rem;
-      color: blue;
+    .left {
+      display: flex;
+      align-content: center;
 
-      &:hover {
-        transform: scale(1.1);
-        filter: drop-shadow(0 2px 2px blue);
-        cursor: pointer;
+      .thumbUp {
+        font-size: 1.25rem;
+        margin-right: 0.5rem;
+        color: blue;
+
+        &:hover {
+          transform: scale(1.1);
+          filter: drop-shadow(0 2px 2px blue);
+          cursor: pointer;
+        }
       }
-    }
-    .like {
-      font-size: 1.25rem;
-      color: red;
-      &:hover {
-        filter: drop-shadow(0 2px 2px red);
-        transform: scale(1.1);
-        cursor: pointer;
+      .like {
+        font-size: 1.25rem;
+        color: red;
+        &:hover {
+          filter: drop-shadow(0 2px 2px red);
+          transform: scale(1.1);
+          cursor: pointer;
+        }
       }
-    }
 
-    .likeMessage {
-      margin-left: 0.5rem;
-    }
+      .likeMessage {
+        margin-left: 0.5rem;
+      }
 
-    span {
-      font-size: 0.8rem;
+      span {
+        font-size: 0.8rem;
+      }
     }
     .right {
       color: black;
+
+      span {
+        font-size: 0.8rem;
+      }
     }
   }
 }

@@ -1,23 +1,31 @@
 .friend_chat {
   height: 100%;
 
-  @media (min-width: 1024px) {
-    overflow-y: scroll;
+  @media (min-width: 768px) {
+    overflow-y: auto;
+    border-right: 2px solid #DBE6F5;
   }
 
   .friend_div {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    height: 4.75rem;
-    background-color: peachpuff;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    height: 4.5rem;
+    margin-inline: 1rem;
+    background-color: #eff2f6;
     padding-inline: 1rem;
     cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
+
+    &:hover {
+      background-color: #dbe6f5;
+    }
 
     .picture_friend {
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 3rem;
+      height: 3rem;
       background-color: aquamarine;
       border-radius: 50%;
     }
@@ -28,8 +36,8 @@
       .friend_name {
         margin-bottom: 0.325rem;
         font-size: 1.125rem;
-        
-        span:hover{
+
+        span:hover {
           text-decoration: underline;
         }
       }
@@ -39,15 +47,15 @@
         align-items: center;
 
         .indicator {
-          width: 0.65rem;
-          height: 0.65rem;
-          background-color: green;
+          width: 0.5rem;
+          height: 0.5rem;
+          background-color: rgb(2, 212, 2);
           border-radius: 50%;
           margin-right: 0.5rem;
         }
 
         .text {
-          font-size: 0.875rem;
+          font-size: 0.75rem;
         }
       }
     }

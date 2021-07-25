@@ -13,7 +13,7 @@ function ProfileLeftSection() {
   const [followings, setFollowings] = useState([]);
   const { user, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(user.following.includes(userId));
-
+  console.log(user.following.includes(userId),followed)
   useEffect(() => {
     const friends = async () => {
       try {
