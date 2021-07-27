@@ -53,6 +53,10 @@
         margin-right: 0.8rem;
         cursor: pointer;
 
+        @media (min-width: 1024px) {
+          display: none;
+        }
+
         &:hover {
           background-color: #96949156;
         }

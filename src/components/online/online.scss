@@ -9,6 +9,7 @@
   font-size: 0.875rem;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
+  overflow-y: auto;
 
   @media (max-width: 1200px) {
     width: 16rem;
@@ -40,7 +41,6 @@
 
   .friends_online {
     display: none;
-    margin-top: 0.8rem;
     background-color: white;
     border-radius: 5px;
     color: black;

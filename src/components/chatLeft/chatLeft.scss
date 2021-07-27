@@ -1,9 +1,10 @@
 .friend_chat {
   height: 100%;
+  background-color: #F5F7FA;
 
   @media (min-width: 768px) {
     overflow-y: auto;
-    border-right: 2px solid #DBE6F5;
+    border-right: 2px solid #dbe6f5;
   }
 
   .friend_div {
@@ -19,8 +20,13 @@
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
 
+    &:first-child {
+      margin-top: 1rem;
+    }
+
     &:hover {
       background-color: #dbe6f5;
+      border: 1px solid #57a2f8;
     }
 
     .picture_friend {
@@ -35,7 +41,7 @@
 
       .friend_name {
         margin-bottom: 0.325rem;
-        font-size: 1.125rem;
+        font-size: 1rem;
 
         span:hover {
           text-decoration: underline;

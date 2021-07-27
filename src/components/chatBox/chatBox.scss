@@ -1,11 +1,95 @@
 .chatDiv {
   display: grid;
-  grid-template-rows: 3.25fr 1fr;
+  grid-template-rows: 3.35fr 1fr;
+  background-color: #F5F7FA;
+  
+  .chat {
+    margin-block: 1rem 2rem;
+    margin-inline: 2rem;
+    background-color: #EFF2F6;
+    overflow-y: auto;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 1px solid hsl(210, 9%, 83%);
 
+    .messageContainer {
+      display: flex;
+
+      .profilePicture {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background-color: white;
+        aspect-ratio: 1/1;
+
+        img {
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+
+      div {
+        width: 100%;
+        .message {
+          width: fit-content;
+          max-width: 60%;
+          height: fit-content;
+          border-radius: 0.75rem;
+          font-size: 0.8rem;
+          padding-block: 0.35rem;
+          padding-inline: 0.75rem;
+        }
+
+        span {
+          font-size: 0.65rem;
+          margin-left: 0.5rem;
+        }
+      }
+    }
+  }
+  
+  .friends_message {
+    .profilePicture {
+      margin-right: 0.75rem;
+    }
+    
+    div .message{
+      background-color: #4867CB;
+      color: hsl(203, 100%, 94%);;
+    }
+  }
+  
+  .own_message {
+    justify-content: flex-end;
+    
+    .profilePicture {
+      margin-left: 0.75rem;
+      order: 2;
+    }
+    
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      
+      .message {
+        color: hsl(210, 9%, 31%);
+        margin-left: auto;
+        background-color: #CBAD48;
+      }
+      
+      span {
+        text-align: right;
+        margin-right: 0.5rem;
+        margin-top: 0.35rem;
+      }
+    }
+  }
+  
   .chatMessage_send {
     display: flex;
     align-items: center;
-    margin-inline: 2.5rem 6rem;
+    margin-inline: 2rem 2rem;
     margin-bottom: 2rem;
 
     textarea {
@@ -15,26 +99,27 @@
       font-size: 1rem;
       width: 100%;
       height: 100%;
-      border-radius: .5rem;
+      border-radius: 0.5rem;
+      border: 1px solid hsl(210, 9%, 83%);
     }
 
-    button{
+    button {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 3rem;
       height: 3rem;
       margin-left: 1rem;
-      border-radius: .25rem;
+      border-radius: 0.25rem;
       border: none;
-      color: #2C2C54;
+      color: #2c2c54;
       background: none;
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
 
-      &:hover{
+      &:hover {
         color: white;
-        background-color: #2C2C54;
+        background-color: #2c2c54;
       }
     }
   }

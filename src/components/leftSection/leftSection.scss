@@ -4,7 +4,7 @@
   height: calc(100vh - 3.5rem);
   padding-block: 1rem;
   background-color: #40407a;
-  overflow-y: scroll;
+  overflow-y: auto;
   font-size: 0.9rem;
 
   @media (max-width: 1023px) {
@@ -29,20 +29,30 @@
     display: none;
   }
 
-  .chat_tag{
+  .chat_tag {
     text-decoration: none;
   }
 
   .tag {
+    position: relative;
     display: flex;
     align-items: center;
+    height: 2.5rem;
     color: white;
     padding-inline: 2rem;
     cursor: pointer;
-    padding-block: 0.5rem;
 
     &:hover {
-      background-color: #2c2c54;
+      &:before {
+        content: "";
+        position: absolute;
+        inset: -5px 0px;
+        border-radius: 5px;
+        background-color: #2c2c54;
+        z-index: -1;
+        transform: scale(0.9, 0.7);
+        // transition: all 150ms ease-in-out 0s;
+      }
     }
 
     @media (max-width: 1023px) {
