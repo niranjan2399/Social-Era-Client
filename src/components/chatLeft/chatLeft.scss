@@ -1,67 +1,230 @@
 .friend_chat {
+  box-sizing: border-box;
   height: 100%;
-  background-color: #F5F7FA;
+  background-color: #f5f7fa;
+  overflow-x: hidden;
+  padding-inline: 1rem;
 
   @media (min-width: 768px) {
     overflow-y: auto;
     border-right: 2px solid #dbe6f5;
   }
 
-  .friend_div {
+  .startConv {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border-radius: 5px;
-    margin-top: 0.5rem;
-    height: 4.5rem;
-    margin-inline: 1rem;
-    background-color: #eff2f6;
-    padding-inline: 1rem;
+    justify-content: center;
+    width: 100%;
+    color: #fff;
+    transition: all 0.5s;
+    border: none;
+    margin-top: 1rem;
+    padding-block: 1rem;
+    background-color: transparent;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+    z-index: 1;
 
-    &:first-child {
-      margin-top: 1rem;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-color: #474787;
+      transition: all 0.3s;
     }
-
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0;
+      transition: all 0.3s;
+      border: 1px solid #474787;
+      transform: scale(1.2, 1.2);
+    }
     &:hover {
-      background-color: #dbe6f5;
-      border: 1px solid #57a2f8;
+      color: #474787;
+      &::before {
+        opacity: 0;
+        transform: scale(0.5, 0.5);
+      }
+      &::after {
+        opacity: 1;
+        transform: scale(1, 1);
+      }
     }
 
-    .picture_friend {
-      width: 3rem;
-      height: 3rem;
-      background-color: aquamarine;
-      border-radius: 50%;
+    .icon {
+      font-size: 1.2rem;
     }
 
-    .details {
-      width: calc(100% - 5rem);
+    span {
+      margin-left: 1rem;
+    }
+  }
 
-      .friend_name {
-        margin-bottom: 0.325rem;
-        font-size: 1rem;
+  .friend_div {
+    .friend {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 5px;
+      margin-top: 0.5rem;
+      height: 4.5rem;
+      background-color: #eff2f6;
+      padding-inline: 1rem;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
 
-        span:hover {
-          text-decoration: underline;
+      &:first-child {
+        margin-top: 1rem;
+      }
+
+      &:hover {
+        background-color: #dbe6f5;
+      }
+
+      .picture_friend {
+        width: 3rem;
+        height: 3rem;
+        background-color: aquamarine;
+        border-radius: 50%;
+      }
+
+      .details {
+        width: calc(100% - 5rem);
+
+        .friend_name {
+          margin-bottom: 0.325rem;
+          font-size: 1rem;
+
+          span:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .friend_status {
+          display: flex;
+          align-items: center;
+
+          .indicator {
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: rgb(2, 212, 2);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+          }
+
+          .text {
+            font-size: 0.75rem;
+          }
+        }
+      }
+    }
+  }
+  .overlay {
+    position: absolute;
+    display: none;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: rgba(51, 51, 51, 0.637);
+    backdrop-filter: blur(2px);
+
+    .friends_overlay {
+      display: flex;
+      flex-direction: column;
+      width: 30rem;
+      height: 30rem;
+      margin-inline: auto;
+      background-color: #57606f;
+      margin-top: 3rem;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      backdrop-filter: blur(8px);
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+        padding: 0.75rem;
+        letter-spacing: 0.03rem;
+        border-bottom: 2px solid #fff;
+
+        .icon {
+          font-size: 1.5rem;
+          cursor: pointer;
         }
       }
 
-      .friend_status {
-        display: flex;
-        align-items: center;
+      .friendsList {
+        flex: 1;
+        width: 100%;
+        overflow-y: auto;
+        background-color: #2d3436;
+        margin-top: 1rem;
+        border-radius: 0.5rem;
+        padding-block: 0.875rem;
+        padding-inline: 1rem;
 
-        .indicator {
-          width: 0.5rem;
-          height: 0.5rem;
-          background-color: rgb(2, 212, 2);
-          border-radius: 50%;
-          margin-right: 0.5rem;
-        }
+        .friend {
+          position: relative;
+          display: flex;
+          align-items: center;
+          z-index: 1;
+          margin-top: 1rem;
+          padding: 0.65rem;
+          cursor: pointer;
 
-        .text {
-          font-size: 0.75rem;
+          &:first-child {
+            margin: 0;
+          }
+
+          &:before {
+            content: "";
+            position: absolute;
+            width: 95%;
+            height: 75%;
+            bottom: 0;
+            right: 0;
+            background-color: #b2bec3ad;
+            border-radius: 0.5rem;
+            z-index: -1;
+            transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+          }
+
+          &:hover {
+            &:before {
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+          .profilePic {
+            display: block;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.25rem;
+            background-color: #474787;
+            margin-right: 1.5rem;
+          }
+
+          span {
+            font-size: 1.125rem;
+          }
         }
       }
     }

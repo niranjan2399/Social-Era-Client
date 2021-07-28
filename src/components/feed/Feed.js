@@ -21,6 +21,9 @@ function Feed({ profileUserId }) {
       );
     };
     fetchPosts();
+    return () => {
+      setPosts([]);
+    };
   }, [profileUserId, user._id]);
 
   return (

@@ -58,7 +58,11 @@ function Login() {
           <FontAwesomeIcon icon={faLock} className="icon" />
         </div>
         <button type="submit" disabled={isFetching}>
-          {isFetching ? <CircularProgress size="1rem" /> : "Login"}
+          {isFetching ? (
+            <CircularProgress size="1rem" style={{ color: "white" }} />
+          ) : (
+            "Login"
+          )}
         </button>
       </form>
       {/* <a href="">Forgot Password?</a> */}

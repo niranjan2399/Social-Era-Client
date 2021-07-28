@@ -1,10 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./post.scss";
-import {
-  MoreVert,
-  ThumbUpAltOutlined,
-  ThumbUpAlt,
-} from "@material-ui/icons";
+import { MoreVert, ThumbUpAltOutlined, ThumbUpAlt } from "@material-ui/icons";
 import axios from "axios";
 import { format } from "timeago.js";
 import { AuthContext } from "../../authContext/AuthContext";
@@ -24,6 +20,9 @@ function Post({ post }) {
       post.likes.includes(currentUser._id) && setIsLiked(true);
     };
     fetchUser();
+    return () => {
+      setPostUser([]);
+    };
   }, [post.userId, post.likes, currentUser._id]);
 
   const likeHandler = () => {

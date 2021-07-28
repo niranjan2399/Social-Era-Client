@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Add, Remove } from "@material-ui/icons";
 import { AuthContext } from "../../authContext/AuthContext";
+import fetchFriends from "../../utils/fetchFriends";
 
 function ProfileLeftSection() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -13,15 +14,12 @@ function ProfileLeftSection() {
   const [followings, setFollowings] = useState([]);
   const { user, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(user.following.includes(userId));
-  console.log(user.following.includes(userId),followed)
+
   useEffect(() => {
     const friends = async () => {
-      try {
-        const res = await axios.get(`/users/friends/${userId}`);
-        setFollowings(res.data);
-      } catch (err) {
-        console.log(err);
-      }
+      const data = await fetchFriends(userId);
+      setFollowings(data);
+      console.log(data);
     };
     friends();
   }, [userId]);

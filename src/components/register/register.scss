@@ -3,15 +3,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 75%;
   margin-block: auto;
   height: fit-content;
 
   form {
     display: grid;
-    grid-template-rows: 2fr 1fr 1fr 1fr 1.25fr;
+    grid-template-rows: 2fr 1fr 1fr 1fr 1fr;
     gap: .75rem;
-    width: 75%;
+    width: 100%;
     margin-block: auto;
     margin-inline: auto;
     
