@@ -4,11 +4,12 @@ import { AuthContext } from "../../authContext/AuthContext";
 import axios from "axios";
 import { Close } from "@material-ui/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import fetchFriends from "../../utils/fetchFriends";
 
 function ChatLeft() {
   const [conversations, setConversations] = useState([]);
+  const [conversationFriends, setConversationFriends] = useState([]);
   const [friends, setFriends] = useState([]);
   const { user } = useContext(AuthContext);
 
@@ -16,8 +17,12 @@ function ChatLeft() {
     const conversationsAndFriends = async () => {
       try {
         const res = await axios.get(`/conversations/${user._id}`);
-        const data = await fetchFriends(user._id);
-        setFriends(data);
+        const convFriends = await Promise.all(
+          res.data.map((c) => {
+            return axios.get(`/users/${c.member[1]}`);
+          })
+        );
+        setConversationFriends(convFriends);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -25,6 +30,18 @@ function ChatLeft() {
     };
 
     conversationsAndFriends();
+  }, [user._id]);
+
+  useEffect(() => {
+    const getFriends = async () => {
+      try {
+        const data = await fetchFriends(user._id);
+        setFriends(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getFriends();
   }, [user._id]);
 
   const toggleFriends = () => {
@@ -37,16 +54,20 @@ function ChatLeft() {
   };
 
   const createConversation = async (e) => {
-    // try {
-      // const res = await axios.post("/conversations", {
-      //   senderId: user._id,
-      //   receiverId: e.target.getAttribute("selector"),
-      // });
-      // setConversations([...conversations, res.data]);
-      // toggleFriends();
-    // } catch (err) {
-      // console.log(err);
-    // }
+    const selector =
+      e.target.nodeName.toLowerCase() === "div"
+        ? e.target.getAttribute("selector")
+        : e.target.parentElement.getAttribute("selector");
+    try {
+      const res = await axios.post("/conversations", {
+        senderId: user._id,
+        receiverId: selector,
+      });
+      setConversations([...conversations, res.data]);
+      toggleFriends();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -56,22 +77,30 @@ function ChatLeft() {
         <span>Start new Conversation</span>
       </button>
       <div className="friend_div">
-        {conversations.map((conversation) => {
-          return (
-            <div className="friend">
-              <div className="picture_friend"></div>
-              <div className="details">
-                <div className="friend_name">
-                  <span>Name</span>
+        {conversationFriends &&
+          conversationFriends.map((friendData) => {
+            return (
+              <div className="friend" key={friendData.data._id}>
+                <div className="picture_friend"></div>
+                <div className="details">
+                  <div className="friend_name">
+                    <span>
+                      {friendData.data.firstName +
+                        " " +
+                        friendData.data.lastName}
+                    </span>
+                  </div>
+                  <div className="friend_status">
+                    <div className="indicator"></div>
+                    <span className="text">Online</span>
+                  </div>
                 </div>
-                <div className="friend_status">
-                  <div className="indicator"></div>
-                  <span className="text">Online</span>
+                <div className="delete">
+                  <FontAwesomeIcon icon={faTrashAlt} className="icon" />
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
       <div className="right_chat"></div>
       <div className="overlay">

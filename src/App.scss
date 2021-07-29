@@ -18,6 +18,7 @@
 body {
   font-family: "Poppins", sans-serif;
   background-color: rgba(128, 128, 128, 0.027);
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -38,6 +39,6 @@ body {
   }
 }
 
-button{
-  font-family: 'Poppins', sans-serif;
+button {
+  font-family: "Poppins", sans-serif;
 }

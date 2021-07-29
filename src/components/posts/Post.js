@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./post.scss";
 import { MoreVert, ThumbUpAltOutlined, ThumbUpAlt } from "@material-ui/icons";
 import axios from "axios";
-import { format } from "timeago.js";
+import moment from "moment";
 import { AuthContext } from "../../authContext/AuthContext";
 import { Link } from "react-router-dom";
 
@@ -52,7 +52,7 @@ function Post({ post }) {
               {postUser.firstName + " " + postUser.lastName}
             </span>
           </Link>
-          <span className="time">{format(post.createdAt)}</span>
+          <span className="time">{moment(post.createdAt).fromNow()}</span>
         </div>
         <div className="right">
           <MoreVert className="more" />
