@@ -5,6 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import { AuthContext } from "../../authContext/AuthContext";
 import { Link } from "react-router-dom";
+import { PostContext } from "../../postContext/postContext";
 
 function Post({ post }) {
   const [postUser, setPostUser] = useState([]);
@@ -12,6 +13,7 @@ function Post({ post }) {
   const [isLiked, setIsLiked] = useState(false);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user: currentUser } = useContext(AuthContext);
+  const { dispatch } = useContext(PostContext);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -31,6 +33,17 @@ function Post({ post }) {
     } catch (err) {}
     isLiked ? setIsLiked(false) : setIsLiked(true);
     setLikes(isLiked ? likes - 1 : likes + 1);
+  };
+
+  const toggleMoreOptions = (e) => {
+    console.log("clicked");
+  };
+
+  const deletePost = async () => {
+    await axios.delete(`/posts/${post._id}`, {
+      data: { userId: currentUser._id },
+    });
+    dispatch({ type: "DELETE_POST", payload: post._id });
   };
 
   return (
@@ -54,9 +67,29 @@ function Post({ post }) {
           </Link>
           <span className="time">{moment(post.createdAt).fromNow()}</span>
         </div>
-        <div className="right">
-          <MoreVert className="more" />
-        </div>
+        {(postUser._id === currentUser._id || currentUser.isAdmin) && (
+          <div className="right">
+            <input type="radio" id={post.createdAt} name="radio_post" />
+            <label htmlFor={post.createdAt} onClick={toggleMoreOptions}>
+              <div
+                className="moreOptions"
+                style={{
+                  width: "1.5rem",
+                  height: "1.5rem",
+                  borderRadius: "50%",
+                }}
+              >
+                <MoreVert className="more" />
+              </div>
+            </label>
+            <div className="more_options">
+              <ul>
+                <li>Edit</li>
+                <li onClick={deletePost}>Delete</li>
+              </ul>
+            </div>
+          </div>
+        )}
       </div>
       <div className="mid">
         {post.desc && <span className="text">{post.desc}</span>}

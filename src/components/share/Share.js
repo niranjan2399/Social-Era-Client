@@ -9,12 +9,14 @@ import {
 } from "@material-ui/icons";
 import { AuthContext } from "../../authContext/AuthContext";
 import axios from "axios";
+import { PostContext } from "../../postContext/postContext";
 
 function Share() {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const desc = useRef(null);
   const [file, setFile] = useState(null);
+  const { dispatch } = useContext(PostContext);
 
   const handleShare = async (e) => {
     e.preventDefault();
@@ -40,8 +42,9 @@ function Share() {
 
       try {
         const res = await axios.post("posts/", newPost);
-        console.log(res);
-        window.location.reload();
+        dispatch({ type: "CREATE_POST", payload: res.data });
+        document.querySelector(".input_share").value = "";
+        setFile();
       } catch (err) {
         console.log(err);
       }
@@ -61,7 +64,12 @@ function Share() {
             alt=""
           />
         </div>
-        <input type="text" ref={desc} placeholder="What's on your mind?" />
+        <input
+          type="text"
+          ref={desc}
+          className="input_share"
+          placeholder="What's on your mind?"
+        />
       </div>
       <hr />
       {file && (
@@ -72,7 +80,7 @@ function Share() {
           </div>
         </div>
       )}
-      <form className="options" onSubmit={handleShare}>
+      <form className="options share_form" onSubmit={handleShare}>
         <div className="option">
           <label htmlFor="file">
             <PhotoLibrary className="photoIcon" />

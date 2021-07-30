@@ -28,8 +28,12 @@ function ChatLeft() {
         console.log(err);
       }
     };
-
     conversationsAndFriends();
+
+    return () => {
+      setConversationFriends([]);
+      setConversations([]);
+    };
   }, [user._id]);
 
   useEffect(() => {
@@ -42,6 +46,10 @@ function ChatLeft() {
       }
     };
     getFriends();
+
+    return () => {
+      setFriends([]);
+    };
   }, [user._id]);
 
   const toggleFriends = () => {
