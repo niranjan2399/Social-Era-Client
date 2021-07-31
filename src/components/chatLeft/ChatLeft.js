@@ -1,59 +1,23 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./chatLeft.scss";
 import { AuthContext } from "../../authContext/AuthContext";
 import axios from "axios";
 import { Close } from "@material-ui/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import fetchFriends from "../../utils/fetchFriends";
 
-function ChatLeft() {
-  const [conversations, setConversations] = useState([]);
-  const [conversationFriends, setConversationFriends] = useState([]);
-  const [friends, setFriends] = useState([]);
+function ChatLeft({
+  setConversations,
+  conversationFriends,
+  friends,
+  setConvFriends,
+  conversations,
+}) {
   const { user } = useContext(AuthContext);
-
-  useEffect(() => {
-    const conversationsAndFriends = async () => {
-      try {
-        const res = await axios.get(`/conversations/${user._id}`);
-        const convFriends = await Promise.all(
-          res.data.map((c) => {
-            return axios.get(`/users/${c.member[1]}`);
-          })
-        );
-        setConversationFriends(convFriends);
-        setConversations(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    conversationsAndFriends();
-
-    return () => {
-      setConversationFriends([]);
-      setConversations([]);
-    };
-  }, [user._id]);
-
-  useEffect(() => {
-    const getFriends = async () => {
-      try {
-        const data = await fetchFriends(user._id);
-        setFriends(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getFriends();
-
-    return () => {
-      setFriends([]);
-    };
-  }, [user._id]);
 
   const toggleFriends = () => {
     const overlay = document.querySelector(".overlay");
+
     if (overlay.hasAttribute("style")) {
       overlay.removeAttribute("style");
     } else {
@@ -62,17 +26,40 @@ function ChatLeft() {
   };
 
   const createConversation = async (e) => {
-    const selector =
-      e.target.nodeName.toLowerCase() === "div"
-        ? e.target.getAttribute("selector")
-        : e.target.parentElement.getAttribute("selector");
+    const selector = e.currentTarget.getAttribute("selector");
+
     try {
       const res = await axios.post("/conversations", {
         senderId: user._id,
         receiverId: selector,
       });
-      setConversations([...conversations, res.data]);
+
+      setConversations((oldConv) => {
+        return [...oldConv, res.data];
+      });
+
+      setConvFriends((oldConvFriends) => {
+        const toAdd = friends.find((friend) => friend._id === selector);
+        return [...oldConvFriends, toAdd];
+      });
+
       toggleFriends();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // todo: delete messages
+  const deleteConversation = async (e) => {
+    const selector = e.currentTarget.getAttribute("data-selector");
+    try {
+      await axios.delete(`/conversations/${user._id}/${selector}`);
+      setConversations((friends) => {
+        return [...friends.filter((f) => f.member[1] !== selector)];
+      });
+      setConvFriends((friends) => {
+        return [...friends.filter((f) => f._id !== selector)];
+      });
     } catch (err) {
       console.log(err);
     }
@@ -86,16 +73,16 @@ function ChatLeft() {
       </button>
       <div className="friend_div">
         {conversationFriends &&
-          conversationFriends.map((friendData) => {
+          conversationFriends.map((conversationData) => {
             return (
-              <div className="friend" key={friendData.data._id}>
+              <div className="friend" key={conversationData._id}>
                 <div className="picture_friend"></div>
                 <div className="details">
                   <div className="friend_name">
                     <span>
-                      {friendData.data.firstName +
+                      {conversationData.firstName +
                         " " +
-                        friendData.data.lastName}
+                        conversationData.lastName}
                     </span>
                   </div>
                   <div className="friend_status">
@@ -103,7 +90,11 @@ function ChatLeft() {
                     <span className="text">Online</span>
                   </div>
                 </div>
-                <div className="delete">
+                <div
+                  className="delete"
+                  data-selector={conversationData._id}
+                  onClick={deleteConversation}
+                >
                   <FontAwesomeIcon icon={faTrashAlt} className="icon" />
                 </div>
               </div>

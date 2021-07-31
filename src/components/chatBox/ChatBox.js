@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./chatBox.scss";
 
 function ChatBox() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const [message, setMessage] = useState("");
+
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    console.log("hello");
+  };
 
   return (
     <div className="chatDiv">
@@ -29,17 +35,21 @@ function ChatBox() {
           </picture>
           <div>
             <div className="message">
-              <p>
-                Lorem, ipsum dolor sit amet consectetur 
-              </p>
+              <p>Lorem, ipsum dolor sit amet consectetur</p>
             </div>
             <span>time</span>
           </div>
         </div>
       </div>
-      <form className="chatMessage_send">
-        <textarea className="message"></textarea>
-        <button className="sendMessage">
+      <div className="chatMessage_send">
+        <textarea
+          className="message"
+          value={message}
+          onChange={(e) => {
+            setMessage(e.target.value);
+          }}
+        ></textarea>
+        <button className="sendMessage" onClick={sendMessage}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -55,7 +65,7 @@ function ChatBox() {
             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
           </svg>
         </button>
-      </form>
+      </div>
     </div>
   );
 }
