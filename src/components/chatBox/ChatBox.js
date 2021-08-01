@@ -1,54 +1,77 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./chatBox.scss";
+import { AuthContext } from "../../authContext/AuthContext";
+import axios from "axios";
+import moment from "moment";
 
-function ChatBox() {
+function ChatBox({ fetchedMessages, setFetchedMessages }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const [message, setMessage] = useState("");
+  const [toSendMessage, setToSendMessage] = useState("");
+  const { user } = useContext(AuthContext);
+  console.log(fetchedMessages);
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    console.log("hello");
+    const data = {
+      senderId: user._id,
+      message: toSendMessage,
+      time: Date.now(),
+    };
+    try {
+      await axios.put(`/messages/${fetchedMessages.conversationId}`, data);
+      setFetchedMessages((fetchedData) => {
+        const messages = [...fetchedData.messages, data];
+        fetchedData.messages = messages;
+        return fetchedData;
+      });
+      setToSendMessage("");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <div className="chatDiv">
       <div className="chat">
-        <div className="messageContainer friends_message">
-          <picture className="profilePicture">
-            <img src={PF + "noProfilePic.png"} alt="" />
-          </picture>
-          <div>
-            <div className="message">
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Sapiente aliquam eaque, officia reprehenderit dicta nesciunt
-                velit quia ad sequi deserunt voluptatem minima dolor id
-                reiciendis, minus eveniet molestias, similique odit.
-              </p>
+        {fetchedMessages.messages.map((message) => {
+          return message.senderId !== user._id ? (
+            <div
+              className="messageContainer friends_message"
+              key={message.time}
+            >
+              <picture className="profilePicture">
+                <img src={PF + "noProfilePic.png"} alt="" />
+              </picture>
+              <div>
+                <div className="message">
+                  <p>{message.message}</p>
+                </div>
+                <span>{moment(message.time).fromNow()}</span>
+              </div>
             </div>
-            <span>time</span>
-          </div>
-        </div>
-        <div className="messageContainer own_message">
-          <picture className="profilePicture">
-            <img src={PF + "noProfilePic.png"} alt="" />
-          </picture>
-          <div>
-            <div className="message">
-              <p>Lorem, ipsum dolor sit amet consectetur</p>
+          ) : (
+            <div className="messageContainer own_message" key={message.time}>
+              <picture className="profilePicture">
+                <img src={PF + "noProfilePic.png"} alt="" />
+              </picture>
+              <div>
+                <div className="message">
+                  <p>{message.message}</p>
+                </div>
+                <span>{moment(message.time).fromNow()}</span>
+              </div>
             </div>
-            <span>time</span>
-          </div>
-        </div>
+          );
+        })}
       </div>
       <div className="chatMessage_send">
         <textarea
           className="message"
-          value={message}
+          value={toSendMessage}
           onChange={(e) => {
-            setMessage(e.target.value);
+            setToSendMessage(e.target.value);
           }}
-        ></textarea>
+        />
         <button className="sendMessage" onClick={sendMessage}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

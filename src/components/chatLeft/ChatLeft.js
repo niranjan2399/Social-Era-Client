@@ -12,6 +12,7 @@ function ChatLeft({
   friends,
   setConvFriends,
   conversations,
+  setFetchedMessages,
 }) {
   const { user } = useContext(AuthContext);
 
@@ -49,7 +50,7 @@ function ChatLeft({
     }
   };
 
-  // todo: delete messages
+  // todo: delete messages in db and clear chatbox
   const deleteConversation = async (e) => {
     const selector = e.currentTarget.getAttribute("data-selector");
     try {
@@ -65,6 +66,14 @@ function ChatLeft({
     }
   };
 
+  const toggleFetchMessage = async (e) => {
+    const friend_conv = conversations.find((conv) => {
+      return conv.member[1] === e.currentTarget.getAttribute("data-selector");
+    });
+    const res = await axios.get(`/messages/${friend_conv._id}`);
+    setFetchedMessages(res.data);
+  };
+
   return (
     <section className="friend_chat">
       <button className="startConv" onClick={toggleFriends}>
@@ -75,7 +84,12 @@ function ChatLeft({
         {conversationFriends &&
           conversationFriends.map((conversationData) => {
             return (
-              <div className="friend" key={conversationData._id}>
+              <div
+                className="friend"
+                key={conversationData._id}
+                data-selector={conversationData._id}
+                onClick={toggleFetchMessage}
+              >
                 <div className="picture_friend"></div>
                 <div className="details">
                   <div className="friend_name">

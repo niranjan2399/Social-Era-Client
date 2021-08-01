@@ -9,11 +9,12 @@
     background-color: #EFF2F6;
     overflow-y: auto;
     border-radius: 0.5rem;
-    padding: 1rem;
+    padding: .5rem 1rem;
     border: 1px solid hsl(210, 9%, 83%);
 
     .messageContainer {
       display: flex;
+      margin-top: .75rem;
 
       .profilePicture {
         width: 2rem;
@@ -43,6 +44,7 @@
         span {
           font-size: 0.65rem;
           margin-left: 0.5rem;
+          margin-top: -.1rem;
         }
       }
     }

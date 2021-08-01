@@ -12,7 +12,8 @@ function Messenger() {
   const [convFriends, setConvFriends] = useState([]);
   const [friends, setFriends] = useState([]);
   const { user } = useContext(AuthContext);
-  
+  const [fetchedMessages, setFetchedMessages] = useState(null);
+
   useEffect(() => {
     (async () => {
       try {
@@ -46,8 +47,16 @@ function Messenger() {
           friends={friends}
           setConvFriends={setConvFriends}
           conversations={conversations}
+          setFetchedMessages={setFetchedMessages}
         />
-        <ChatBox />
+        {fetchedMessages ? (
+          <ChatBox
+            fetchedMessages={fetchedMessages}
+            setFetchedMessages={setFetchedMessages}
+          />
+        ) : (
+          <div>Hello</div>
+        )}
       </div>
     </>
   );
