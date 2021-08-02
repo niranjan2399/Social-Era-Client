@@ -41,26 +41,6 @@
       align-items: center;
       justify-content: center;
       width: fit-content;
-
-      .back {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 2.5rem;
-        width: 2.5rem;
-        color: white;
-        border-radius: 50%;
-        margin-right: 0.8rem;
-        cursor: pointer;
-
-        @media (min-width: 1024px) {
-          display: none;
-        }
-
-        &:hover {
-          background-color: #96949156;
-        }
-      }
     }
 
     .hamburger {

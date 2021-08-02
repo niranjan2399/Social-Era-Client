@@ -2,15 +2,32 @@
   width: 100%;
   margin-top: 2.5rem;
   height: calc(100vh - 6.25rem);
-  
-  @media (min-width: 768px) {
-    padding-top: 0.25rem;
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
     margin: 0;
     height: calc(100vh - 3.75rem);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1.1fr 2fr;
+    margin: 0;
+  }
+
+  .messenger_intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(97, 97, 97, 0.363);
+
+    span {
+      text-align: center;
+      padding: 1rem 3rem;
+      color: #2c2c54;
+      background-color: rgba(255, 255, 255, 0.301);
+      border-radius: 0.5rem;
+    }
   }
 }

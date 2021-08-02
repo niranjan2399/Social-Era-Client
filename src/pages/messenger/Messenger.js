@@ -13,18 +13,22 @@ function Messenger() {
   const [friends, setFriends] = useState([]);
   const { user } = useContext(AuthContext);
   const [fetchedMessages, setFetchedMessages] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     (async () => {
       try {
         const res = await axios.get(`/conversations/${user._id}`);
         const data = await fetchFriends(user._id);
+
         await Promise.all([res, data]).then((values) => {
           const convFr = values[0].data.map((conv) => {
             return values[1].find((friends) => conv.member[1] === friends._id);
           });
+
           setConvFriends(convFr);
         });
+
         setFriends(data);
         setConversations(res.data);
       } catch (err) {
@@ -37,6 +41,25 @@ function Messenger() {
     };
   }, [user._id]);
 
+  console.log(windowWidth); // clear �
+  useEffect(() => {
+    var resizeTimer;
+
+    const resizeHandler = () => {
+      clearTimeout(resizeTimer);
+
+      resizeTimer = setTimeout(() => {
+        setWindowWidth(window.innerWidth);
+      }, 250);
+    };
+
+    window.addEventListener("resize", resizeHandler);
+
+    return () => {
+      window.removeEventListener("resize", resizeHandler);
+    };
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -48,6 +71,7 @@ function Messenger() {
           setConvFriends={setConvFriends}
           conversations={conversations}
           setFetchedMessages={setFetchedMessages}
+          fetchedMessages={fetchedMessages}
         />
         {fetchedMessages ? (
           <ChatBox
@@ -55,7 +79,9 @@ function Messenger() {
             setFetchedMessages={setFetchedMessages}
           />
         ) : (
-          <div>Hello</div>
+          <div className="messenger_intro">
+            <span>Select a conversation to view chat!</span>
+          </div>
         )}
       </div>
     </>

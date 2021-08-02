@@ -1,6 +1,6 @@
 .chatDiv {
   display: grid;
-  grid-template-rows: 3.35fr 1fr;
+  grid-template-rows: 3.75fr 1fr;
   background-color: #F5F7FA;
   
   .chat {
@@ -9,8 +9,14 @@
     background-color: #EFF2F6;
     overflow-y: auto;
     border-radius: 0.5rem;
-    padding: .5rem 1rem;
+    padding-bottom: .5rem;
     border: 1px solid hsl(210, 9%, 83%);
+
+    .chat_top{
+      width: 100%;
+      height: 3.275rem;
+      background-color: rgba(128, 128, 128, 0.856);
+    }
 
     .messageContainer {
       display: flex;
@@ -51,6 +57,7 @@
   }
   
   .friends_message {
+    margin-left: 1rem;
     .profilePicture {
       margin-right: 0.75rem;
     }
@@ -63,6 +70,7 @@
   
   .own_message {
     justify-content: flex-end;
+    margin-right: 1rem;
     
     .profilePicture {
       margin-left: 0.75rem;

@@ -1,18 +1,35 @@
 import React from "react";
 import "./leftSection.scss";
 import data from "./toRender";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function LeftSection() {
   return (
     <div className="left_section">
       {data.map((list, i) => {
         return {
-          ...(list.text === "Chat" ? (
-            <Link to="/messenger" key={i} className="tag chat_tag">
+          ...(list.text === "Feed" ? (
+            <NavLink
+              to="/"
+              exact
+              key={i}
+              className="tag link_tag"
+              activeStyle={{ backgroundColor: "#2C2C54" }}
+            >
               <list.logo />
               <span>{list.text}</span>
-            </Link>
+            </NavLink>
+          ) : list.text === "Chat" ? (
+            <NavLink
+              to="/messenger"
+              exact
+              key={i}
+              className="tag link_tag"
+              activeStyle={{ backgroundColor: "#2C2C54" }}
+            >
+              <list.logo />
+              <span>{list.text}</span>
+            </NavLink>
           ) : (
             <div key={i} className="tag">
               <list.logo />

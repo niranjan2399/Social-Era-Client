@@ -8,7 +8,6 @@ function ChatBox({ fetchedMessages, setFetchedMessages }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [toSendMessage, setToSendMessage] = useState("");
   const { user } = useContext(AuthContext);
-  console.log(fetchedMessages);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -33,6 +32,12 @@ function ChatBox({ fetchedMessages, setFetchedMessages }) {
   return (
     <div className="chatDiv">
       <div className="chat">
+        <div className="chat_top">
+          <picture></picture>
+          <div>
+            <span></span>
+          </div>
+        </div>
         {fetchedMessages.messages.map((message) => {
           return message.senderId !== user._id ? (
             <div
