@@ -1,26 +1,48 @@
 .chatDiv {
   display: grid;
   grid-template-rows: 3.75fr 1fr;
-  background-color: #F5F7FA;
-  
+  background-color: #f5f7fa;
+  max-height: 100%;
+
   .chat {
     margin-block: 1rem 2rem;
     margin-inline: 2rem;
-    background-color: #EFF2F6;
-    overflow-y: auto;
+    background-color: #eff2f6;
     border-radius: 0.5rem;
-    padding-bottom: .5rem;
+    padding-bottom: 0.5rem;
+    // height: 100%;
+    overflow-y: auto;
     border: 1px solid hsl(210, 9%, 83%);
 
-    .chat_top{
+    .chat_top {
+      display: flex;
+      align-items: center;
       width: 100%;
       height: 3.275rem;
+      padding-inline: 0.75rem;
       background-color: rgba(128, 128, 128, 0.856);
+
+      .back {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background-color: #eff2f6;
+        color: #2c2c54;
+        cursor: pointer;
+        transition: all 200ms ease-in;
+
+        &:hover {
+          border: 3px solid #2c2c54;
+        }
+      }
     }
 
     .messageContainer {
       display: flex;
-      margin-top: .75rem;
+      margin-top: 0.875rem;
 
       .profilePicture {
         width: 2rem;
@@ -36,7 +58,10 @@
       }
 
       div {
+        display: flex;
+        flex-direction: column;
         width: 100%;
+
         .message {
           width: fit-content;
           max-width: 60%;
@@ -50,52 +75,49 @@
         span {
           font-size: 0.65rem;
           margin-left: 0.5rem;
-          margin-top: -.1rem;
+          margin-top: 0.2rem;
         }
       }
     }
   }
-  
+
   .friends_message {
     margin-left: 1rem;
     .profilePicture {
       margin-right: 0.75rem;
     }
-    
-    div .message{
-      background-color: #4867CB;
-      color: hsl(203, 100%, 94%);;
+
+    div .message {
+      background-color: #4867cb;
+      color: hsl(203, 100%, 94%);
     }
   }
-  
+
   .own_message {
     justify-content: flex-end;
     margin-right: 1rem;
-    
+
     .profilePicture {
       margin-left: 0.75rem;
       order: 2;
     }
-    
+
     div {
-      display: flex;
-      flex-direction: column;
       justify-content: flex-end;
-      
+
       .message {
         color: hsl(210, 9%, 31%);
         margin-left: auto;
-        background-color: #CBAD48;
+        background-color: #cbad48;
       }
-      
+
       span {
         text-align: right;
         margin-right: 0.5rem;
-        margin-top: 0.35rem;
       }
     }
   }
-  
+
   .chatMessage_send {
     display: flex;
     align-items: center;

@@ -1,13 +1,51 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./chatBox.scss";
 import { AuthContext } from "../../authContext/AuthContext";
 import axios from "axios";
 import moment from "moment";
+import { friendOfUser } from "../../utils/friendOfUser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-function ChatBox({ fetchedMessages, setFetchedMessages }) {
+function ChatBox({
+  fetchedMessages,
+  setFetchedMessages,
+  socket,
+  conversations,
+}) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [toSendMessage, setToSendMessage] = useState("");
+  const [arrivalMessage, setArrivalMessage] = useState(null);
   const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        senderId: data.senderId,
+        message: data.text,
+        time: Date.now(),
+      });
+    });
+  }, [socket]);
+
+  useEffect(() => {
+    const convFriendId = friendOfUser(conversations, user, fetchedMessages);
+
+    arrivalMessage &&
+      convFriendId === arrivalMessage.senderId &&
+      setFetchedMessages((prev) => {
+        prev.messages = [...prev.messages, arrivalMessage];
+        return prev;
+      });
+
+    setArrivalMessage(null);
+  }, [
+    arrivalMessage,
+    conversations,
+    fetchedMessages,
+    setFetchedMessages,
+    user,
+  ]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -27,23 +65,31 @@ function ChatBox({ fetchedMessages, setFetchedMessages }) {
     } catch (err) {
       console.log(err);
     }
+
+    const receiverId = friendOfUser(conversations, user, fetchedMessages);
+
+    socket.current.emit("sendMessage", {
+      senderId: user._id,
+      receiverId,
+      text: toSendMessage,
+    });
   };
 
   return (
     <div className="chatDiv">
       <div className="chat">
         <div className="chat_top">
+          <div className="back">
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </div>
           <picture></picture>
           <div>
             <span></span>
           </div>
         </div>
-        {fetchedMessages.messages.map((message) => {
+        {fetchedMessages.messages.map((message, i) => {
           return message.senderId !== user._id ? (
-            <div
-              className="messageContainer friends_message"
-              key={message.time}
-            >
+            <div className="messageContainer friends_message" key={i}>
               <picture className="profilePicture">
                 <img src={PF + "noProfilePic.png"} alt="" />
               </picture>

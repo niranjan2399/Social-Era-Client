@@ -94,7 +94,9 @@ function ChatLeft({
 
   const toggleFetchMessage = async (e) => {
     const friend_conv = conversations.find((conv) => {
-      return conv.member[1] === e.currentTarget.getAttribute("data-selector");
+      return conv.member.includes(
+        e.currentTarget.getAttribute("data-selector")
+      );
     });
     const res = await axios.get(`/messages/${friend_conv._id}`);
     setFetchedMessages(res.data);

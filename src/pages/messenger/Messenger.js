@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { AuthContext } from "../../authContext/AuthContext";
 import ChatBox from "../../components/chatBox/ChatBox";
 import ChatLeft from "../../components/chatLeft/ChatLeft";
 import Navbar from "../../components/navbar/Navbar";
 import fetchFriends from "../../utils/fetchFriends";
 import "./messenger.scss";
+import { io } from "socket.io-client";
 
 function Messenger() {
   const [conversations, setConversations] = useState([]);
@@ -14,6 +15,22 @@ function Messenger() {
   const { user } = useContext(AuthContext);
   const [fetchedMessages, setFetchedMessages] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const socket = useRef();
+
+  useEffect(() => {
+    socket.current = io("ws://localhost:8000", {
+      reconnection: true,
+      reconnectionDelay: 1000,
+      maxReconnectionAttempts: Infinity,
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.current.emit("addUser", user._id);
+    socket.current.on("getUsers", (data) => {
+      console.log(data);
+    });
+  }, [user]);
 
   useEffect(() => {
     (async () => {
@@ -23,7 +40,9 @@ function Messenger() {
 
         await Promise.all([res, data]).then((values) => {
           const convFr = values[0].data.map((conv) => {
-            return values[1].find((friends) => conv.member[1] === friends._id);
+            return values[1].find((friends) =>
+              conv.member.includes(friends._id)
+            );
           });
 
           setConvFriends(convFr);
@@ -65,18 +84,20 @@ function Messenger() {
       <Navbar />
       <div className="container_chat">
         <ChatLeft
+          conversations={conversations}
           setConversations={setConversations}
           conversationFriends={convFriends}
-          friends={friends}
           setConvFriends={setConvFriends}
-          conversations={conversations}
-          setFetchedMessages={setFetchedMessages}
           fetchedMessages={fetchedMessages}
+          setFetchedMessages={setFetchedMessages}
+          friends={friends}
         />
         {fetchedMessages ? (
           <ChatBox
             fetchedMessages={fetchedMessages}
             setFetchedMessages={setFetchedMessages}
+            socket={socket}
+            conversations={conversations}
           />
         ) : (
           <div className="messenger_intro">
