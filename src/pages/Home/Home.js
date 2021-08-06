@@ -10,6 +10,7 @@ function Home() {
     <>
       <Navbar />
       <div className="main">
+      <div className="navigation_overlay"></div>
         <LeftSection />
         <Feed />
         <RightSection />

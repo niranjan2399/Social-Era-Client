@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: space-between;
   padding-inline: 1.5rem;
-  z-index: 2;
+  z-index: 3;
   border-bottom: 1px solid #ffb142;
 
   @media (min-width: 1023px) {
@@ -51,12 +51,6 @@
       @media (min-width: 479px) {
         display: none;
       }
-
-      // .menu-btn:checked ~ .menu a,
-      // .menu-btn:checked ~ .menu li {
-      //   opacity: 1;
-      //   transition: 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.2s;
-      // }
 
       .menu-btn {
         display: none;

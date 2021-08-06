@@ -6,6 +6,7 @@ import { Close } from "@material-ui/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import LeftSection from "../../components/leftSection/LeftSection";
+import { setAttribute } from "../../utils/setAttr";
 
 function ChatLeft({
   setConversations,
@@ -15,21 +16,13 @@ function ChatLeft({
   conversations,
   setFetchedMessages,
   fetchedMessages,
+  windowWidth,
 }) {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    document
-      .querySelector(".left_section .friends_div")
-      .setAttribute("style", "display: none");
-
-    document
-      .querySelector(".left_section hr")
-      .setAttribute("style", "display: none");
-
-    document.querySelectorAll(".tag span").forEach((span) => {
-      span.setAttribute("style", "display: none");
-    });
+    setAttribute(".left_section .friends_div", "style", "display: none");
+    setAttribute(".left_section hr", "style", "display: none");
   }, []);
 
   const toggleFriends = () => {
@@ -102,8 +95,16 @@ function ChatLeft({
     setFetchedMessages(res.data);
   };
 
+  const showChat = () => {
+    document
+      .querySelector(".messenger_container")
+      .setAttribute("style", "display: none");
+
+    document.querySelector(".chatDiv")?.removeAttribute("style");
+  };
+
   return (
-    <div className="messenger_container" style={{ display: "flex" }}>
+    <div className="messenger_container">
       <LeftSection />
       <section className="friend_chat">
         <button className="startConv" onClick={toggleFriends}>
@@ -114,7 +115,11 @@ function ChatLeft({
           {conversationFriends &&
             conversationFriends.map((conversationData) => {
               return (
-                <div className="friend" key={conversationData._id}>
+                <div
+                  className="friend"
+                  key={conversationData._id}
+                  {...(windowWidth <= 767 && { onClick: showChat })}
+                >
                   <div
                     className="friend_conversation"
                     data-selector={conversationData._id}

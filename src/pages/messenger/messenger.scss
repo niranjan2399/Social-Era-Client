@@ -1,26 +1,30 @@
 .container_chat {
   width: 100%;
-  margin-top: 2.5rem;
-  height: calc(100vh - 3.5rem);
+  margin-top: 2.623125rem;
+  height: calc(100vh - 6.2rem);
 
   @media (min-width: 768px) and (max-width: 1023px) {
-    display: grid;
-    grid-template-columns: 1fr 1.35fr;
+    display: flex;
     margin: 0;
-    height: calc(100vh - 3.75rem);
+    height: calc(100vh - 3.5rem);
   }
 
   @media (min-width: 1024px) {
-    display: grid;
-    grid-template-columns: 1.1fr 2fr;
+    display: flex;
     margin: 0;
+    height: calc(100vh - 3.5rem);
   }
 
   .messenger_intro {
     display: flex;
+    flex: 1.35;
     align-items: center;
     justify-content: center;
     background-color: rgba(97, 97, 97, 0.363);
+
+    @media (min-width: 1024px) {
+      flex: 2;
+    }
 
     span {
       text-align: center;

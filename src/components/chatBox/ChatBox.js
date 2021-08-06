@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import "./chatBox.scss";
 import { AuthContext } from "../../authContext/AuthContext";
 import axios from "axios";
@@ -17,6 +17,7 @@ function ChatBox({
   const [toSendMessage, setToSendMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const { user } = useContext(AuthContext);
+  const intoView = useRef();
 
   useEffect(() => {
     socket.current.on("getMessage", (data) => {
@@ -46,6 +47,10 @@ function ChatBox({
     setFetchedMessages,
     user,
   ]);
+
+  useEffect(() => {
+    intoView.current?.scrollIntoView({ behavior: "smooth" });
+  }, [fetchedMessages.messages]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -89,7 +94,11 @@ function ChatBox({
         </div>
         {fetchedMessages.messages.map((message, i) => {
           return message.senderId !== user._id ? (
-            <div className="messageContainer friends_message" key={i}>
+            <div
+              ref={intoView}
+              className="messageContainer friends_message"
+              key={i}
+            >
               <picture className="profilePicture">
                 <img src={PF + "noProfilePic.png"} alt="" />
               </picture>
@@ -101,7 +110,11 @@ function ChatBox({
               </div>
             </div>
           ) : (
-            <div className="messageContainer own_message" key={message.time}>
+            <div
+              ref={intoView}
+              className="messageContainer own_message"
+              key={message.time}
+            >
               <picture className="profilePicture">
                 <img src={PF + "noProfilePic.png"} alt="" />
               </picture>
@@ -114,6 +127,7 @@ function ChatBox({
             </div>
           );
         })}
+        <div ref={intoView}></div>
       </div>
       <div className="chatMessage_send">
         <textarea

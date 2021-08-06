@@ -1,10 +1,19 @@
+.messenger_container {
+  position: relative;
+  display: flex;
+  flex: 1;
+
+  @media (min-width: 1024px) {
+    flex: 1.1;
+  }
+}
+
 .friend_chat {
   box-sizing: border-box;
   height: 100%;
   background-color: #f5f7fa;
   overflow-x: hidden;
   padding-inline: 1rem;
-  overflow-y: auto;
   flex: 1;
 
   @media (min-width: 768px) {
@@ -75,6 +84,9 @@
   }
 
   .friend_div {
+    margin-top: 1rem;
+    overflow-x: hidden;
+    overflow-y: auto;
     .friend {
       display: flex;
       align-items: center;
@@ -87,7 +99,7 @@
       transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
 
       &:first-child {
-        margin-top: 1rem;
+        margin-top: 0;
       }
 
       &:hover {
@@ -111,7 +123,7 @@
         .details {
           .friend_name {
             margin-bottom: 0.325rem;
-            font-size: .875rem;
+            font-size: 0.875rem;
 
             span:hover {
               text-decoration: underline;

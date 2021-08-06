@@ -60,7 +60,6 @@ function Messenger() {
     };
   }, [user._id]);
 
-  console.log(windowWidth); // clear �
   useEffect(() => {
     var resizeTimer;
 
@@ -79,6 +78,22 @@ function Messenger() {
     };
   }, []);
 
+  useEffect(() => {
+    document.querySelector(".messenger_container")?.removeAttribute("style");
+    if (windowWidth <= 767) {
+      document
+        .querySelector(".chatDiv")
+        ?.setAttribute("style", "display: none");
+
+      document
+        .querySelector(".messenger_intro")
+        ?.setAttribute("style", "display: none");
+    } else {
+      document.querySelector(".chatDiv")?.removeAttribute("style");
+      document.querySelector(".messenger_intro")?.removeAttribute("style");
+    }
+  }, [windowWidth]);
+
   return (
     <>
       <Navbar />
@@ -91,6 +106,7 @@ function Messenger() {
           fetchedMessages={fetchedMessages}
           setFetchedMessages={setFetchedMessages}
           friends={friends}
+          windowWidth={windowWidth}
         />
         {fetchedMessages ? (
           <ChatBox
