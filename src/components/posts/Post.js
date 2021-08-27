@@ -1,31 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./post.scss";
-import { MoreVert, ThumbUpAltOutlined, ThumbUpAlt } from "@material-ui/icons";
-import axios from "axios";
+import {
+  ThumbUpAltOutlined,
+  ThumbUpAlt,
+  Edit,
+  Delete,
+  Bookmark,
+  BookmarkBorder,
+} from "@material-ui/icons";
+import { IconButton } from "@material-ui/core";
+import axios from "../../axios";
 import moment from "moment";
 import { AuthContext } from "../../authContext/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { PostContext } from "../../postContext/postContext";
 
 function Post({ post }) {
-  const [postUser, setPostUser] = useState([]);
   const [likes, setLikes] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user: currentUser } = useContext(AuthContext);
+  const [bookmarked, setBookmarked] = useState(
+    currentUser && currentUser.bookmarks.includes(post._id)
+  );
   const { dispatch } = useContext(PostContext);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const res = await axios.get(`/users/${post.userId}`);
-      setPostUser(res.data);
-      post.likes.includes(currentUser._id) && setIsLiked(true);
-    };
-    fetchUser();
-    return () => {
-      setPostUser([]);
-    };
-  }, [post.userId, post.likes, currentUser._id]);
+  const history = useHistory();
 
   const likeHandler = () => {
     try {
@@ -35,10 +34,6 @@ function Post({ post }) {
     setLikes(isLiked ? likes - 1 : likes + 1);
   };
 
-  const toggleMoreOptions = (e) => {
-    console.log("clicked");
-  };
-
   const deletePost = async () => {
     await axios.delete(`/posts/${post._id}`, {
       data: { userId: currentUser._id },
@@ -46,48 +41,74 @@ function Post({ post }) {
     dispatch({ type: "DELETE_POST", payload: post._id });
   };
 
+  const handleBookmark = async () => {
+    if (!bookmarked) {
+      const res = await axios.put(`/users/add-bookmark/${post._id}`, {
+        userId: currentUser._id,
+      });
+
+      if (res.data.ok) {
+        currentUser.bookmarks.push(post._id);
+        setBookmarked(true);
+      }
+    } else {
+      const res = await axios.put(`/users/remove-bookmark/${post._id}`, {
+        userId: currentUser._id,
+      });
+
+      if (res.data.ok) {
+        const bookmarks = currentUser.bookmarks.filter(
+          (bookmark) => bookmark !== post._id
+        );
+        currentUser.bookmarks = bookmarks;
+
+        setBookmarked(false);
+      }
+    }
+  };
+
   return (
     <div className="post">
       <div className="top">
         <div className="left">
-          <Link to={`/profile/${post.userId}`} className="user_profile">
+          <Link to={`/profile/${post.userId._id}`} className="user_profile">
             <div className="profilePic">
               <img
                 src={
-                  postUser.profilePicture
-                    ? PF + postUser.profilePicture
+                  post.userId.profilePicture
+                    ? PF + post.userId.profilePicture
                     : PF + "noProfilePic.png"
                 }
                 alt=""
               />
             </div>
             <span className="username">
-              {postUser.firstName + " " + postUser.lastName}
+              {post.userId.firstName + " " + post.userId.lastName}
             </span>
           </Link>
           <span className="time">{moment(post.createdAt).fromNow()}</span>
         </div>
-        {(postUser._id === currentUser._id || currentUser.isAdmin) && (
+        {(post.userId._id === currentUser._id || currentUser.isAdmin) && (
           <div className="right">
-            <input type="radio" id={post.createdAt} name="radio_post" />
-            <label htmlFor={post.createdAt} onClick={toggleMoreOptions}>
-              <div
-                className="moreOptions"
+            <IconButton
+              color="inherit"
+              style={{ width: "2.25rem", height: "2.25rem" }}
+              onClick={() => history.push(`/post/${post._id}`)}
+            >
+              <Edit className="rightIcon" />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              style={{ width: "2.25rem", height: "2.25rem" }}
+              onClick={deletePost}
+            >
+              <Delete
+                className="rightIcon"
                 style={{
-                  width: "1.5rem",
-                  height: "1.5rem",
-                  borderRadius: "50%",
+                  color: "#d63031",
                 }}
-              >
-                <MoreVert className="more" />
-              </div>
-            </label>
-            <div className="more_options">
-              <ul>
-                <li>Edit</li>
-                <li onClick={deletePost}>Delete</li>
-              </ul>
-            </div>
+              />
+            </IconButton>
           </div>
         )}
       </div>
@@ -109,7 +130,16 @@ function Post({ post }) {
           <span className="likeMessage">{likes} people liked it</span>
         </div>
         <div className="right">
-          <span className="comment">4 comments</span>
+          <IconButton
+            style={{ width: "2.25rem", height: "2.25rem" }}
+            onClick={handleBookmark}
+          >
+            {bookmarked ? (
+              <Bookmark className="icon" />
+            ) : (
+              <BookmarkBorder className="icon" />
+            )}
+          </IconButton>
         </div>
       </div>
     </div>

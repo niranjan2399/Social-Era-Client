@@ -13,16 +13,16 @@ const data = [
     text: "Feed",
   },
   {
-    logo: PlayCircleFilled,
-    text: "Videos",
+    logo: Bookmark,
+    text: "Bookmarks",
   },
   {
     logo: Chat,
     text: "Chat",
   },
   {
-    logo: Bookmark,
-    text: "Bookmarks",
+    logo: PlayCircleFilled,
+    text: "Videos",
   },
   {
     logo: Help,

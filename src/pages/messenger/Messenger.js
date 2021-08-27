@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../axios";
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { AuthContext } from "../../authContext/AuthContext";
 import ChatBox from "../../components/chatBox/ChatBox";
@@ -61,6 +61,14 @@ function Messenger() {
   }, [user._id]);
 
   useEffect(() => {
+    document.querySelector(".left_section").classList.add("chatPageLeft");
+
+    return () => {
+      document.querySelector(".left_section").classList.remove("chatPageLeft");
+    };
+  }, []);
+
+  useEffect(() => {
     var resizeTimer;
 
     const resizeHandler = () => {
@@ -80,6 +88,15 @@ function Messenger() {
 
   useEffect(() => {
     document.querySelector(".messenger_container")?.removeAttribute("style");
+
+    if (windowWidth >= 480) {
+      document.querySelector(".navigation_overlay").removeAttribute("style");
+      document.querySelector(".left_section").removeAttribute("style");
+      document.querySelector(
+        ".navbar .left .navigationIcon .hamburger input"
+      ).checked = false;
+    }
+
     if (windowWidth <= 767) {
       document
         .querySelector(".chatDiv")

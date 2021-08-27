@@ -30,6 +30,17 @@ function LeftSection() {
               <list.logo />
               <span>{list.text}</span>
             </NavLink>
+          ) : list.text === "Bookmarks" ? (
+            <NavLink
+              to="/bookmarks"
+              exact
+              key={i}
+              className="tag link_tag"
+              activeStyle={{ backgroundColor: "#2C2C54" }}
+            >
+              <list.logo />
+              <span>{list.text}</span>
+            </NavLink>
           ) : (
             <div key={i} className="tag">
               <list.logo />
@@ -38,42 +49,6 @@ function LeftSection() {
           )),
         };
       })}
-      <hr />
-      <div className="friends_div">
-        <span className="friend_count">ADMINS (0)</span>
-        <div className="friends">
-          <div className="pic"></div>
-          <span className="name">Siddha</span>
-        </div>
-        <div className="friends">
-          <div className="pic"></div>
-          <span className="name">Siddha</span>
-        </div>
-        <div className="friends">
-          <div className="pic"></div>
-          <span className="name">Siddha</span>
-        </div>
-        <div className="friends">
-          <div className="pic"></div>
-          <span className="name">Siddha</span>
-        </div>
-        <div className="friends">
-          <div className="pic"></div>
-          <span className="name">Siddha</span>
-        </div>
-        <div className="friends">
-          <div className="pic"></div>
-          <span className="name">Siddha</span>
-        </div>
-        <div className="friends">
-          <div className="pic"></div>
-          <span className="name">Siddha</span>
-        </div>
-        <div className="friends">
-          <div className="pic"></div>
-          <span className="name">Siddha</span>
-        </div>
-      </div>
     </div>
   );
 }

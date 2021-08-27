@@ -11,6 +11,8 @@ import LoginRegister from "./pages/LoginRegister/LoginRegister";
 import { AuthContext } from "./authContext/AuthContext";
 import { useContext } from "react";
 import Messenger from "./pages/messenger/Messenger";
+import Bookmarks from "./pages/bookmarks/Bookmarks";
+import EditPost from "./pages/editPost/EditPost";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -38,6 +40,16 @@ function App() {
             path="/messenger"
             exact
             render={() => (user ? <Messenger /> : <Redirect to="/" />)}
+          />
+          <Route
+            path="/bookmarks"
+            exact
+            render={() => (user ? <Bookmarks /> : <Redirect to="/" />)}
+          />
+          <Route
+            path="/post/:id"
+            exact
+            render={() => (user ? <EditPost /> : <Redirect to="/" />)}
           />
           <Route
             path="/login"

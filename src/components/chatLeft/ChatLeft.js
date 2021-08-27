@@ -1,12 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "./chatLeft.scss";
 import { AuthContext } from "../../authContext/AuthContext";
-import axios from "axios";
+import axios from "../../axios";
 import { Close } from "@material-ui/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import LeftSection from "../../components/leftSection/LeftSection";
-import { setAttribute } from "../../utils/setAttr";
 
 function ChatLeft({
   setConversations,
@@ -19,11 +18,6 @@ function ChatLeft({
   windowWidth,
 }) {
   const { user } = useContext(AuthContext);
-
-  useEffect(() => {
-    setAttribute(".left_section .friends_div", "style", "display: none");
-    setAttribute(".left_section hr", "style", "display: none");
-  }, []);
 
   const toggleFriends = () => {
     const overlay = document.querySelector(".overlay");
@@ -60,7 +54,7 @@ function ChatLeft({
   };
 
   const deleteConversation = async (e) => {
-    const selector = e.currentTarget.getAttribute("data-selector");
+    const selector = e.currentTarget.dataset.selector;
     const conv = conversations.find(
       (conversation) => conversation.member[1] === selector
     );
@@ -87,9 +81,7 @@ function ChatLeft({
 
   const toggleFetchMessage = async (e) => {
     const friend_conv = conversations.find((conv) => {
-      return conv.member.includes(
-        e.currentTarget.getAttribute("data-selector")
-      );
+      return conv.member.includes(e.currentTarget.dataset.selector);
     });
     const res = await axios.get(`/messages/${friend_conv._id}`);
     setFetchedMessages(res.data);

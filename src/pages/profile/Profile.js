@@ -4,7 +4,7 @@ import "./profile.scss";
 import { Panorama, AddAPhoto } from "@material-ui/icons";
 import ProfileLeftSection from "../../components/profileLeftSection/ProfileLeftSection";
 import Navbar from "../../components/navbar/Navbar";
-import axios from "axios";
+import axios from "../../axios";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../authContext/AuthContext";
 

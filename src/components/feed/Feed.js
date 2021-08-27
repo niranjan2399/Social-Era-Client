@@ -1,10 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import Share from "../share/Share";
 import Post from "../posts/Post";
-import axios from "axios";
+import axios from "../../axios";
 import "./feed.scss";
 import { AuthContext } from "../../authContext/AuthContext";
 import { PostContext } from "../../postContext/postContext";
+import { CircularProgress } from "@material-ui/core";
 
 function Feed({ profileUserId }) {
   const { user } = useContext(AuthContext);
@@ -26,10 +27,15 @@ function Feed({ profileUserId }) {
   return (
     <div className="feed">
       {profileUserId ? user._id === profileUserId && <Share /> : <Share />}
-      {post &&
+      {post ? (
         post.map((p) => {
-          return <Post key={p._id} post={p} />;
-        })}
+          return p && <Post key={p._id} post={p} />;
+        })
+      ) : (
+        <div style={{ width: "100%", textAlign: "center", marginTop: "5rem" }}>
+          <CircularProgress />
+        </div>
+      )}
     </div>
   );
 }

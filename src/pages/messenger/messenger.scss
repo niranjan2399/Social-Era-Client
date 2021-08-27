@@ -15,6 +15,14 @@
     height: calc(100vh - 3.5rem);
   }
 
+  .navigation_overlay {
+    display: none;
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(3px) contrast(0.5);
+    z-index: 2;
+  }
+
   .messenger_intro {
     display: flex;
     flex: 1.35;

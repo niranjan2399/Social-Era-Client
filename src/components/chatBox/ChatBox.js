@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import "./chatBox.scss";
 import { AuthContext } from "../../authContext/AuthContext";
-import axios from "axios";
+import axios from "../../axios";
 import moment from "moment";
 import { friendOfUser } from "../../utils/friendOfUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

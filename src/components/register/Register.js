@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./register.scss";
-import axios from "axios";
+import axios from "../../axios";
 
 function Register() {
   const firstName = useRef();
@@ -38,6 +38,7 @@ function Register() {
             type="text"
             id="first_name"
             required
+            autoFocus
             ref={firstName}
             placeholder="First Name"
           />

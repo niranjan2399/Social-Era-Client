@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useRef } from "react";
 import "./Login.scss";
 import { AuthContext } from "../../authContext/AuthContext";
-import axios from "axios";
+import axios from "../../axios";
 import { CircularProgress } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -40,6 +40,7 @@ function Login() {
             id="email"
             ref={email}
             required
+            autoFocus
             autoComplete="email"
             placeholder="Email"
           />

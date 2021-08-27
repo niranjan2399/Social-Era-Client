@@ -1,15 +1,13 @@
 .online {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 19rem;
-  max-height: 20rem;
   box-shadow: 0 0 5px #2c2c54;
   background-color: #40407a;
   color: white;
   font-size: 0.875rem;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
-  overflow-y: auto;
 
   @media (max-width: 1200px) {
     width: 16rem;
@@ -40,11 +38,13 @@
   }
 
   .friends_online {
-    display: none;
     background-color: white;
     border-radius: 5px;
     color: black;
+    max-height: 0;
+    overflow-y: auto;
     margin-inline: 0.2rem;
+    transition: all 200ms ease-in;
 
     &:last-of-type {
       border-top-right-radius: 5px;

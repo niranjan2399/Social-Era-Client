@@ -10,7 +10,7 @@ function Online() {
       friends.removeAttribute("style");
       reveal.removeAttribute("style");
     } else {
-      friends.setAttribute("style", "display: block");
+      friends.setAttribute("style", "max-height: 18rem");
       reveal.setAttribute("style", "transform: rotateZ(180deg)");
     }
   }

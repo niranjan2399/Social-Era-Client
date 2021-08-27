@@ -8,7 +8,7 @@ import {
   Cancel,
 } from "@material-ui/icons";
 import { AuthContext } from "../../authContext/AuthContext";
-import axios from "axios";
+import axios from "../../axios";
 import { PostContext } from "../../postContext/postContext";
 
 function Share() {
@@ -93,10 +93,6 @@ function Share() {
               onChange={(e) => setFile(e.target.files[0])}
             />
           </label>
-          <div>
-            <Label className="labelIcon" />
-            <span>Tag</span>
-          </div>
           <div>
             <LocationOn className="locationIcon" />
             <span>Location</span>
