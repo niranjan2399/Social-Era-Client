@@ -3,20 +3,17 @@ import "./share.scss";
 import {
   PhotoLibrary,
   LocationOn,
-  Label,
   EmojiEmotions,
   Cancel,
 } from "@material-ui/icons";
 import { AuthContext } from "../../authContext/AuthContext";
 import axios from "../../axios";
-import { PostContext } from "../../postContext/postContext";
 
-function Share() {
+function Share({ setPosts }) {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const desc = useRef(null);
   const [file, setFile] = useState(null);
-  const { dispatch } = useContext(PostContext);
 
   const handleShare = async (e) => {
     e.preventDefault();
@@ -42,8 +39,10 @@ function Share() {
 
       try {
         const res = await axios.post("posts/", newPost);
-        dispatch({ type: "CREATE_POST", payload: res.data });
-        document.querySelector(".input_share").value = "";
+        setPosts((post) => {
+          return [{ ...res.data, userId: user }, ...post];
+        });
+        desc.current.value = "";
         setFile();
       } catch (err) {
         console.log(err);

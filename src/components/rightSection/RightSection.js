@@ -26,8 +26,8 @@ function RightSection() {
         <span className="suggestions__Title">Friend Suggestions</span>
         <div className="suggestion__main">
           {suggestions ? (
-            suggestions.map((user, i) => {
-              return <FriendRequestCard key={i} user={user} />;
+            suggestions.map((u, i) => {
+              return <FriendRequestCard key={i} user={u} />;
             })
           ) : (
             <CircularProgress

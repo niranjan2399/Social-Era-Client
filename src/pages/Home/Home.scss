@@ -1,4 +1,4 @@
-.main {
+.homeContainer {
   position: relative;
   display: grid;
   grid-template-columns: 3fr 6fr 4fr;
@@ -10,11 +10,14 @@
   }
 
   @media (max-width: 1023px) {
-    grid-template-columns: 0.25fr 6fr 3fr;
+    grid-template-columns: 0.7fr 6fr 4fr;
+  }
+
+  @media (max-width: 859px) {
+    grid-template-columns: 1.75fr 15fr;
   }
 
   @media (max-width: 767px) {
-    grid-template-columns: 1fr 15fr;
     margin-top: 2.623125rem;
   }
 

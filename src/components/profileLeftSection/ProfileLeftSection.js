@@ -2,22 +2,32 @@ import React, { useContext, useEffect, useState } from "react";
 import "./profileLeftSection.scss";
 import { Cake, LocationOn, Favorite, Home, Wc } from "@material-ui/icons";
 import { useParams } from "react-router-dom";
-import axios from "../../axios";
 import { Link } from "react-router-dom";
 import { Add, Remove } from "@material-ui/icons";
 import { AuthContext } from "../../authContext/AuthContext";
-import fetchFriends from "../../utils/fetchFriends";
+import axios from "../../axios";
+import { fetchFriends, removeFriend } from "../../utils/friends";
 
-function ProfileLeftSection() {
+function ProfileLeftSection({ profileUser }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const userId = useParams().id;
   const [friends, setFriends] = useState([]);
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const [isFriend, setIsFriend] = useState(null);
+  const [requestSent, setRequestSent] = useState(false);
 
   useEffect(() => {
-    user && setIsFriend(user.friends.includes(userId) ? true : false);
+    if (user) {
+      setIsFriend(user.friends.includes(userId) ? true : false);
+    }
   }, [user, userId]);
+
+  useEffect(() => {
+    profileUser &&
+      setRequestSent(
+        profileUser.friendRequests.includes(user._id) ? true : false
+      );
+  }, [profileUser, user]);
 
   useEffect(() => {
     const friends = async () => {
@@ -28,7 +38,31 @@ function ProfileLeftSection() {
   }, [userId]);
 
   const handleFriend = async () => {
-    //
+    try {
+      if (!requestSent && !isFriend) {
+        const res = await axios.put(`users/send-friend-request/${userId}`, {
+          userId: user._id,
+        });
+
+        res.data.ok && setRequestSent(true);
+      } else if (requestSent) {
+        const res = await axios.put(`users/remove-friend-request/${userId}`, {
+          userId: user._id,
+        });
+
+        res.data.ok && setRequestSent(false);
+      } else if (isFriend) {
+        const res = await removeFriend(userId, { userId: user._id });
+
+        if (res.data.ok) {
+          setIsFriend(!isFriend);
+          setFriends(friends.filter((friend) => friend._id !== user._id));
+          dispatch({ type: "REMOVE_FRIEND", payload: userId });
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -36,8 +70,14 @@ function ProfileLeftSection() {
       {user._id !== userId && (
         <div className="followOption">
           <button onClick={handleFriend}>
-            <span>{isFriend ? "Unfriend" : "Add Friend"}</span>
-            {isFriend ? <Remove /> : <Add />}
+            <span>
+              {requestSent
+                ? "Request Sent"
+                : isFriend
+                ? "Unfriend"
+                : "Add Friend"}
+            </span>
+            {!requestSent && (isFriend ? <Remove /> : <Add />)}
           </button>
           <button>
             <span>Message</span>
@@ -63,11 +103,6 @@ function ProfileLeftSection() {
           <span>Jaipur</span>
         </div>
         <div className="details">
-          <Home className="logo" />
-          <span>Place:</span>
-          <span>Amer</span>
-        </div>
-        <div className="details">
           <Favorite className="logo" />
           <span>Relationship:</span>
           <span>Commited</span>
@@ -75,9 +110,9 @@ function ProfileLeftSection() {
       </div>
       <div className="friends_div">
         <h4>User Friends</h4>
-        <div className="followings">
-          {friends &&
-            friends.map((friends) => {
+        {friends && friends.length ? (
+          <div className="followings">
+            {friends.map((friends) => {
               return (
                 <Link
                   to={`/profile/${friends._id}`}
@@ -91,7 +126,10 @@ function ProfileLeftSection() {
                 </Link>
               );
             })}
-        </div>
+          </div>
+        ) : (
+          <div className="err">No Friends Found</div>
+        )}
       </div>
     </div>
   );

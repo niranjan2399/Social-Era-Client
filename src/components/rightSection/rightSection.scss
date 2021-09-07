@@ -3,20 +3,20 @@
   top: 3.5rem;
   height: calc(100vh - 3.5rem);
 
-  @media (max-width: 767px) {
+  @media (max-width: 860px) {
     display: none;
   }
 
   .right_section__suggestions {
     margin-top: 1.5rem;
     margin-right: 1.75rem;
-    padding: 1.25rem;
+    padding: 1rem;
     background-color: white;
     border-radius: 0.25rem;
 
     .suggestions__Title {
       display: block;
-      font-size: 1rem;
+      font-size: 0.9rem;
       margin-bottom: 1rem;
     }
 
@@ -25,7 +25,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin-inline: 1rem;
 
       .suggestion__user {
         display: flex;
@@ -34,8 +33,20 @@
         width: 100%;
         border-radius: 0.25rem;
         border: 1px solid #eeeeee;
-        padding: 0.75rem;
         margin-bottom: 0.75rem;
+        cursor: pointer;
+        transition: all 200ms linear;
+
+        &:hover {
+          background-color: #eeeeee8a;
+        }
+
+        .cover {
+          display: flex;
+          align-items: center;
+          padding: 0.5rem 0 0.5rem 0.5rem;
+          flex: 1;
+        }
 
         .user__pic {
           width: 3rem;
@@ -48,29 +59,23 @@
           display: flex;
           flex-direction: column;
           flex: 1;
-          margin-inline: 1rem;
+          margin-left: 1rem;
 
           div {
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-
+            width: 100%;
             span {
-              float: left;
-
-              &:first-of-type {
-                font-size: 0.9rem;
-                margin-right: 1rem;
-              }
-
-              &:last-of-type {
-                font-size: 0.8rem;
-              }
+              font-size: 0.8rem;
+              text-overflow: ellipsis;
             }
           }
 
           span {
             text-transform: capitalize;
           }
+        }
+
+        .options {
+          margin-right: 0.5rem;
         }
       }
 

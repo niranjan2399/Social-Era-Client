@@ -4,7 +4,7 @@ import { AuthContext } from "../../authContext/AuthContext";
 import ChatBox from "../../components/chatBox/ChatBox";
 import ChatLeft from "../../components/chatLeft/ChatLeft";
 import Navbar from "../../components/navbar/Navbar";
-import fetchFriends from "../../utils/fetchFriends";
+import { fetchFriends } from "../../utils/friends";
 import "./messenger.scss";
 import { io } from "socket.io-client";
 

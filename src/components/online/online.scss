@@ -8,12 +8,10 @@
   font-size: 0.875rem;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
+  z-index: 1;
 
   @media (max-width: 1200px) {
     width: 16rem;
-  }
-  @media (max-width: 1024px) {
-    width: 14rem;
   }
 
   .top {

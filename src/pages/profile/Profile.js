@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../../authContext/AuthContext";
 
 function Profile() {
-  const [profileUser, setUser] = useState(null);
+  const [profileUser, setProfileUser] = useState(null);
   const { user } = useContext(AuthContext);
   const profileId = useParams().id;
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -17,7 +17,7 @@ function Profile() {
   useEffect(() => {
     const fetchUser = async () => {
       const res = await axios.get(`/users/${profileId}`);
-      setUser(res.data);
+      setProfileUser(res.data);
     };
 
     fetchUser();
@@ -53,7 +53,7 @@ function Profile() {
           </div>
         </div>
         <div className="timeline_bottom">
-          <ProfileLeftSection />
+          <ProfileLeftSection profileUser={profileUser} />
           <Feed profileUserId={profileId} />
         </div>
       </div>
