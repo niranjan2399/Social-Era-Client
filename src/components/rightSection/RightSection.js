@@ -32,6 +32,7 @@ function RightSection() {
           ) : (
             <CircularProgress
               style={{
+                color: "#40407A",
                 width: "1.75rem",
                 height: "1.75rem",
                 marginTop: ".5rem",

@@ -6,7 +6,6 @@ import { Home, People, Warning } from "@material-ui/icons";
 import { AuthContext } from "../../authContext/AuthContext";
 import { Badge } from "@material-ui/core";
 import { removeRequest, addFriend } from "../../utils/friends";
-import axios from "../../axios";
 
 function Navbar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -45,9 +44,6 @@ function Navbar() {
         document
           .querySelector(".navigation_overlay")
           .setAttribute("style", "display: unset");
-        document
-          .querySelector("body")
-          .setAttribute("style", "overflow-y: hidden");
       } else {
         document
           .querySelector(".navigation_overlay")
@@ -61,7 +57,6 @@ function Navbar() {
           document
             .querySelector(".navigation_overlay")
             .removeAttribute("style");
-          document.querySelector("body").removeAttribute("style");
         }, 250);
       } else {
         document.querySelector(".navigation_overlay").removeAttribute("style");

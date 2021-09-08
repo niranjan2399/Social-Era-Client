@@ -97,7 +97,9 @@ function Post({ post, setPosts }) {
               </Link>
               <span className="time">{moment(post.createdAt).fromNow()}</span>
             </div>
-            {(post.userId._id === currentUser._id || currentUser.isAdmin) && (
+            {((history.location.pathname !== "/bookmarks" &&
+              post.userId._id === currentUser._id) ||
+              currentUser.isAdmin) && (
               <div className="right">
                 <IconButton
                   color="inherit"

@@ -83,7 +83,7 @@ function Share({ setPosts }) {
         <div className="option">
           <label htmlFor="file">
             <PhotoLibrary className="photoIcon" />
-            <span>Photo/Video</span>
+            <span>Add Image</span>
             <input
               type="file"
               accept=".png,.jpg,.jpeg"
@@ -92,14 +92,6 @@ function Share({ setPosts }) {
               onChange={(e) => setFile(e.target.files[0])}
             />
           </label>
-          <div>
-            <LocationOn className="locationIcon" />
-            <span>Location</span>
-          </div>
-          <div>
-            <EmojiEmotions className="feelingsIcon" />
-            <span>Feelings</span>
-          </div>
         </div>
         <button type="submit">Share</button>
       </form>

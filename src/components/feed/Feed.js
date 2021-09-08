@@ -20,6 +20,10 @@ function Feed({ profileUserId }) {
         return new Date(p2.createdAt) - new Date(p1.createdAt);
       });
       setPosts(sortedPosts);
+
+      return () => {
+        setPosts(null);
+      };
     };
     fetchPosts();
   }, [profileUserId, user]);
@@ -44,7 +48,7 @@ function Feed({ profileUserId }) {
         )
       ) : (
         <div style={{ width: "100%", textAlign: "center", marginTop: "5rem" }}>
-          <CircularProgress />
+          <CircularProgress style={{ color: "#40407A" }} />
         </div>
       )}
     </div>
