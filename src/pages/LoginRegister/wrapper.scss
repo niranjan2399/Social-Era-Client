@@ -12,7 +12,7 @@
     height: 30rem;
     padding: 1.5rem;
     background-color: #eff2f6;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     box-shadow: 0 0 8rem #08080ebe;
 
     .left {
@@ -49,7 +49,6 @@
         rgba(138, 97, 248, 1) 0%,
         rgba(236, 95, 231, 1) 100%
       );
-      // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8a61f8', endColorstr='#ec5fe7',GradientType=1 );
       border: none;
       text-align: center;
       font-weight: bold;
@@ -98,6 +97,7 @@
       min-height: 90%;
       background-color: white;
       border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
       .tabs {
         position: relative;

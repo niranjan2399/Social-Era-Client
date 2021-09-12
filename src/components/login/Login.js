@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 
 function Login() {
-  const email = useRef();
+  const username = useRef();
   const password = useRef();
   const { isFetching, dispatch } = useContext(AuthContext);
 
@@ -26,7 +26,7 @@ function Login() {
     };
 
     loginCall(
-      { email: email.current.value, password: password.current.value },
+      { username: username.current.value, password: password.current.value },
       dispatch
     );
   };
@@ -36,13 +36,13 @@ function Login() {
       <form onSubmit={handleLogin} className="login_form">
         <div className="form_group">
           <input
-            type="email"
-            id="email"
-            ref={email}
+            type="text"
+            id="text"
+            ref={username}
             required
             autoFocus
-            autoComplete="email"
-            placeholder="Email"
+            autoComplete="username"
+            placeholder="Username"
           />
           <FontAwesomeIcon icon={faUser} className="icon" />
         </div>

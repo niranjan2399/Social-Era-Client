@@ -9,13 +9,23 @@ import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import LoginRegister from "./pages/LoginRegister/LoginRegister";
 import { AuthContext } from "./authContext/AuthContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Messenger from "./pages/messenger/Messenger";
 import Bookmarks from "./pages/bookmarks/Bookmarks";
 import EditPost from "./pages/editPost/EditPost";
+import CompleteProfile from "./pages/completeProfile/CompleteProfile";
+import axios from "./axios";
 
 function App() {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
+
+  useEffect(() => {
+    (async () => {
+      const res = await axios.get("/users/current-user");
+      console.log(res.data);
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+    })();
+  }, [dispatch]);
 
   return (
     <>
@@ -50,6 +60,12 @@ function App() {
             path="/post/:id"
             exact
             render={() => (user ? <EditPost /> : <Redirect to="/" />)}
+          />
+          <Route
+            path="/complete-profile/:id"
+            exact
+            // render={() => (user ? <Redirect to="/" /> : <CompleteProfile />)}
+            render={() => <CompleteProfile />}
           />
           <Route
             path="/login"
