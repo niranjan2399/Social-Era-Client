@@ -6,6 +6,7 @@ import { Home, People, Warning } from "@material-ui/icons";
 import { AuthContext } from "../../authContext/AuthContext";
 import { Badge } from "@material-ui/core";
 import { removeRequest, addFriend } from "../../utils/friends";
+import axios from "../../axios";
 
 function Navbar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -61,6 +62,14 @@ function Navbar() {
       } else {
         document.querySelector(".navigation_overlay").removeAttribute("style");
       }
+    }
+  };
+
+  const handleLogout = async () => {
+    const res = await axios.delete(`/auth/logout/${user._id}`);
+    if (res.data.ok) {
+      dispatch({ type: "LOGOUT" });
+      history.push("/login");
     }
   };
 
@@ -138,7 +147,16 @@ function Navbar() {
                           onClick={handleProfilePush}
                           data-friend_id={friend._id}
                         >
-                          <div className="profilePic"></div>
+                          <div className="profilePic">
+                            <img
+                              src={
+                                friend.profilePicture
+                                  ? PF + friend.profilePicture
+                                  : PF + "noProfilePic.png"
+                              }
+                              alt=""
+                            />
+                          </div>
                           <div className="name">
                             {friend.firstName} {friend.lastName}
                           </div>
@@ -163,7 +181,7 @@ function Navbar() {
             <i className="lzf7d6o1"></i>
             <div className="more_options">
               <ul>
-                <li>Log Out</li>
+                <li onClick={handleLogout}>Log Out</li>
               </ul>
             </div>
           </div>

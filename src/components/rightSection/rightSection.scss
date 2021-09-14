@@ -53,6 +53,11 @@
           height: 3rem;
           border-radius: 50%;
           border: 1px solid #eeeeee;
+
+          img {
+            object-fit: contain;
+            width: 100%;
+          }
         }
 
         .user__details {

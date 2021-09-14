@@ -13,7 +13,7 @@
     letter-spacing: 0.05rem;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
-    border-bottom: 1px solid #2c2c54;
+    border-bottom: 1px solid gray;
   }
 
   .followOption {
@@ -36,8 +36,8 @@
       padding: 0.4rem;
       cursor: pointer;
 
-      span{
-        margin-right: .25rem;
+      span {
+        margin-right: 0.25rem;
       }
 
       &:hover {
@@ -98,4 +98,25 @@
       }
     }
   }
+
+  .userInfo {
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid gray;
+
+      h4 {
+        border-bottom: none;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40vh;
 }

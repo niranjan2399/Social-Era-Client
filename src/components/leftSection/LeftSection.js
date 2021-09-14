@@ -1,11 +1,17 @@
 import React from "react";
 import "./leftSection.scss";
 import data from "./toRender";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 function LeftSection() {
+  const path = useHistory().location.pathname;
+
   return (
-    <div className="left_section">
+    <div
+      className={
+        path === "/messenger" ? "left_section chatPageLeft" : "left_section"
+      }
+    >
       {data.map((list, i) => {
         return {
           ...(list.text === "Feed" ? (

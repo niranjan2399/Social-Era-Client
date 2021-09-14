@@ -22,7 +22,6 @@ function App() {
   useEffect(() => {
     (async () => {
       const res = await axios.get("/users/current-user");
-      console.log(res.data);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
     })();
   }, [dispatch]);
@@ -62,9 +61,13 @@ function App() {
             render={() => (user ? <EditPost /> : <Redirect to="/" />)}
           />
           <Route
-            path="/complete-profile/:id"
+            path="/user-details/:id"
             exact
-            // render={() => (user ? <Redirect to="/" /> : <CompleteProfile />)}
+            render={() => <CompleteProfile />}
+          />
+          <Route
+            path="/edit-details/:id"
+            exact
             render={() => <CompleteProfile />}
           />
           <Route

@@ -9,6 +9,7 @@ const FriendRequestCard = ({ user }) => {
   const { user: currentUser } = useContext(AuthContext);
   const [sendRequest, setSendRequest] = useState();
   const history = useHistory();
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
     currentUser &&
@@ -54,7 +55,16 @@ const FriendRequestCard = ({ user }) => {
         onClick={handleProfilePush}
         data-friend_id={user._id}
       >
-        <div className="user__pic"></div>
+        <div className="user__pic">
+          <img
+            src={
+              user.profilePicture
+                ? PF + user.profilePicture
+                : PF + "noProfilePic.png"
+            }
+            alt=""
+          />
+        </div>
         <div className="user__details">
           <div>
             <span>{user.firstName + " " + user.lastName}</span>

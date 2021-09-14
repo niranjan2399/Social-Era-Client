@@ -1,16 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./profileLeftSection.scss";
-import { Cake, LocationOn, Favorite, Home, Wc } from "@material-ui/icons";
+import { Cake, LocationOn, Favorite, Wc, Edit } from "@material-ui/icons";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Add, Remove } from "@material-ui/icons";
 import { AuthContext } from "../../authContext/AuthContext";
 import axios from "../../axios";
 import { fetchFriends, removeFriend } from "../../utils/friends";
+import { IconButton } from "@material-ui/core";
 
 function ProfileLeftSection({ profileUser }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const userId = useParams().id;
+  const history = useHistory();
   const [friends, setFriends] = useState([]);
   const { user, dispatch } = useContext(AuthContext);
   const [isFriend, setIsFriend] = useState(null);
@@ -20,6 +22,10 @@ function ProfileLeftSection({ profileUser }) {
     if (user) {
       setIsFriend(user.friends.includes(userId) ? true : false);
     }
+
+    return () => {
+      setIsFriend(null);
+    };
   }, [user, userId]);
 
   useEffect(() => {
@@ -27,6 +33,10 @@ function ProfileLeftSection({ profileUser }) {
       setRequestSent(
         profileUser.friendRequests.includes(user._id) ? true : false
       );
+
+    return () => {
+      setRequestSent(false);
+    };
   }, [profileUser, user]);
 
   useEffect(() => {
@@ -35,6 +45,10 @@ function ProfileLeftSection({ profileUser }) {
       setFriends(data);
     };
     friends();
+
+    return () => {
+      setFriends([]);
+    };
   }, [userId]);
 
   const handleFriend = async () => {
@@ -86,26 +100,42 @@ function ProfileLeftSection({ profileUser }) {
         </div>
       )}
       <div className="userInfo">
-        <h4>User Information</h4>
+        <div className="top">
+          <h4>User Information</h4>
+          {profileUser._id === user._id && (
+            <IconButton
+              style={{ width: "2.5rem", height: "2.5rem" }}
+              onClick={() => history.push(`/edit-details/${profileUser._id}`)}
+            >
+              <Edit style={{ color: "#01a3a4" }} />
+            </IconButton>
+          )}
+        </div>
         <div className="details">
           <Wc className="logo" />
           <span>Gender:</span>
-          <span>Male</span>
+          <span>{profileUser.gender}</span>
         </div>
         <div className="details">
           <Cake className="logo" />
           <span>D.O.B:</span>
-          <span>1.2.3</span>
+          <span>
+            {profileUser.dob ? profileUser.dob.split("T")[0] : "Not Available"}
+          </span>
         </div>
         <div className="details">
           <LocationOn className="logo" />
           <span>City:</span>
-          <span>Jaipur</span>
+          <span>{profileUser.city ? profileUser.city : "Not Available"}</span>
         </div>
         <div className="details">
           <Favorite className="logo" />
           <span>Relationship:</span>
-          <span>Commited</span>
+          <span>
+            {profileUser.relationship
+              ? profileUser.relationship
+              : "Not Available"}
+          </span>
         </div>
       </div>
       <div className="friends_div">
@@ -120,7 +150,14 @@ function ProfileLeftSection({ profileUser }) {
                   key={friends._id}
                 >
                   <picture>
-                    <img src={PF + "noProfilePic.png"} alt="" />
+                    <img
+                      src={
+                        friends.profilePicture
+                          ? PF + friends.profilePicture
+                          : PF + "noProfilePic.png"
+                      }
+                      alt=""
+                    />
                   </picture>
                   <span className="name">{friends.firstName}</span>
                 </Link>

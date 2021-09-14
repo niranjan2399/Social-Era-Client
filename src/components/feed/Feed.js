@@ -12,7 +12,7 @@ function Feed({ profileUserId }) {
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    (async () => {
       const res = profileUserId
         ? await axios.get(`/posts/profile/${profileUserId}`)
         : await axios.get(`/posts/timeline/${user._id}`);
@@ -20,12 +20,11 @@ function Feed({ profileUserId }) {
         return new Date(p2.createdAt) - new Date(p1.createdAt);
       });
       setPosts(sortedPosts);
+    })();
 
-      return () => {
-        setPosts(null);
-      };
+    return () => {
+      setPosts(null);
     };
-    fetchPosts();
   }, [profileUserId, user]);
 
   return (
@@ -48,7 +47,9 @@ function Feed({ profileUserId }) {
         )
       ) : (
         <div style={{ width: "100%", textAlign: "center", marginTop: "5rem" }}>
-          <CircularProgress style={{ color: "#40407A" }} />
+          <CircularProgress
+            style={{ color: "#40407A", width: "2rem", height: "2rem" }}
+          />
         </div>
       )}
     </div>

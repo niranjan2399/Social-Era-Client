@@ -11,8 +11,8 @@
     flex-direction: column;
     align-items: center;
     width: 40rem;
-    height: 30rem;
-    padding: 0.5rem;
+    height: fit-content;
+    padding: 0.5rem 0.75rem;
     background-color: white;
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -33,7 +33,10 @@
       padding-inline: 1rem;
 
       span {
-        font-size: 0.85rem;
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        margin-top: 0.75rem;
       }
 
       .cpContainer__images {
@@ -62,13 +65,175 @@
           }
 
           input:checked + label {
-            box-shadow: #474787 0px 0px 0px 0.25rem;
+            box-shadow: #2d3436 0px 0px 0px 0.25rem;
           }
 
           img {
             object-fit: contain;
             width: 100%;
             cursor: pointer;
+          }
+        }
+      }
+
+      .cpContainer__dob {
+        display: flex;
+        align-items: center;
+        margin-top: 1.5rem;
+
+        input {
+          flex: 3;
+          border-radius: 1rem;
+          padding: 0.25rem 0.5rem;
+          border: 1px solid black;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        label {
+          flex: 1;
+          font-size: 0.9rem;
+        }
+      }
+
+      .cpContainer__relation {
+        display: flex;
+        flex-direction: column;
+        margin-block: 0.5rem;
+
+        span {
+          font-size: 0.9rem;
+          margin-bottom: 0.75rem;
+        }
+
+        .optionWrapper {
+          display: flex;
+          justify-content: space-around;
+
+          .option {
+            label {
+              display: inline-block;
+              width: 8rem;
+              text-align: center;
+              padding: 0.5rem;
+              font-size: 0.85rem;
+              color: #2d3436;
+              border-radius: 0.25rem;
+              border: 1px solid #2d3436;
+              cursor: pointer;
+              transition: all 200ms linear;
+
+              &:hover {
+                box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+              }
+            }
+
+            input {
+              display: none;
+
+              &:checked {
+                & + label {
+                  background-color: #2d3436;
+                  color: white;
+
+                  &:hover {
+                    box-shadow: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .cpContainer__city {
+        display: flex;
+        align-items: center;
+        margin-block: 1.75rem 1.5rem;
+
+        label {
+          flex: 1;
+          font-size: 0.9rem;
+        }
+
+        input {
+          flex: 3;
+          width: 100%;
+          padding: 0.4rem 0.75rem;
+          border-radius: 1rem;
+          border: 1px solid #2d3436;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        button {
+          position: relative;
+          width: 8rem;
+          color: #fff;
+          transition: all 0.5s;
+          border: none;
+          padding-block: 0.5rem;
+          background-color: transparent;
+          cursor: pointer;
+          font-weight: 700;
+          letter-spacing: 0.05rem;
+          z-index: 1;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: #474787;
+            transition: all 0.3s;
+          }
+          &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0;
+            transition: all 0.3s;
+            border: 1px solid #474787;
+            transform: scale(1.2, 1.2);
+          }
+          &:hover {
+            color: #474787;
+            &::before {
+              opacity: 0;
+              transform: scale(0.5, 0.5);
+            }
+            &::after {
+              opacity: 1;
+              transform: scale(1, 1);
+            }
+          }
+        }
+
+        .link {
+          margin-block: 1.25rem 0.75rem;
+          text-decoration: none;
+          color: #778ca3;
+          font-size: 0.8rem;
+
+          &:hover {
+            text-decoration: underline;
           }
         }
       }

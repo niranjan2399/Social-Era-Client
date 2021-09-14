@@ -18,6 +18,7 @@ function ChatLeft({
   windowWidth,
 }) {
   const { user } = useContext(AuthContext);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const toggleFriends = () => {
     const overlay = document.querySelector(".overlay");
@@ -117,7 +118,17 @@ function ChatLeft({
                     data-selector={conversationData._id}
                     onClick={toggleFetchMessage}
                   >
-                    <div className="picture_friend"></div>
+                    <div className="picture_friend">
+                      {" "}
+                      <img
+                        src={
+                          conversationData.profilePicture
+                            ? PF + conversationData.profilePicture
+                            : PF + "noProfilePic.png"
+                        }
+                        alt=""
+                      />
+                    </div>
                     <div className="details">
                       <div className="friend_name">
                         <span>
@@ -151,19 +162,32 @@ function ChatLeft({
               <Close className="icon" onClick={toggleFriends} />
             </div>
             <div className="friendsList">
-              {friends.map((friend) => {
-                return (
-                  <div
-                    className="friend"
-                    onClick={createConversation}
-                    key={friend._id}
-                    selector={friend._id}
-                  >
-                    <picture className="profilePic"></picture>
-                    <span>{friend.firstName + " " + friend.lastName}</span>
-                  </div>
-                );
-              })}
+              {friends ? (
+                friends.map((friend) => {
+                  return (
+                    <div
+                      className="friend"
+                      onClick={createConversation}
+                      key={friend._id}
+                      selector={friend._id}
+                    >
+                      <picture className="profilePic">
+                        <img
+                          src={
+                            friend.profilePicture
+                              ? PF + friend.profilePicture
+                              : PF + "noProfilePic.png"
+                          }
+                          alt=""
+                        />
+                      </picture>
+                      <span>{friend.firstName + " " + friend.lastName}</span>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="err">No Friends Found</div>
+              )}
             </div>
           </div>
         </div>

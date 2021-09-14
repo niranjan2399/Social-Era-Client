@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { useRef } from "react";
+import React, { useContext, useState } from "react";
 import "./Login.scss";
 import { AuthContext } from "../../authContext/AuthContext";
 import axios from "../../axios";
@@ -8,8 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 
 function Login() {
-  const username = useRef();
-  const password = useRef();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { isFetching, dispatch } = useContext(AuthContext);
 
   const handleLogin = (e) => {
@@ -25,10 +24,7 @@ function Login() {
       }
     };
 
-    loginCall(
-      { username: username.current.value, password: password.current.value },
-      dispatch
-    );
+    loginCall({ email, password }, dispatch);
   };
 
   return (
@@ -38,11 +34,12 @@ function Login() {
           <input
             type="text"
             id="text"
-            ref={username}
             required
             autoFocus
-            autoComplete="username"
-            placeholder="Username"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
+            placeholder="Email"
           />
           <FontAwesomeIcon icon={faUser} className="icon" />
         </div>
@@ -50,9 +47,10 @@ function Login() {
           <input
             type="password"
             id="password"
-            ref={password}
             autoComplete="current-password"
             required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             minLength="6"
             placeholder="Password"
           />

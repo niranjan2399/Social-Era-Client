@@ -56,17 +56,11 @@ function Messenger() {
     })();
 
     return () => {
-      setConversations([]);
+      setFriends(null);
+      setConversations(null);
+      setConvFriends(null);
     };
   }, [user._id]);
-
-  useEffect(() => {
-    document.querySelector(".left_section").classList.add("chatPageLeft");
-
-    return () => {
-      document.querySelector(".left_section").classList.remove("chatPageLeft");
-    };
-  }, []);
 
   useEffect(() => {
     var resizeTimer;

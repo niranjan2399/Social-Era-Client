@@ -3,8 +3,8 @@ import Online from "../online/Online";
 import axios from "../../axios";
 import { AuthContext } from "../../authContext/AuthContext";
 import "./rightSection.scss";
-import { CircularProgress, IconButton, Tooltip } from "@material-ui/core";
-import { CheckCircleOutline, ExpandMore, PersonAdd } from "@material-ui/icons";
+import { CircularProgress } from "@material-ui/core";
+import { ExpandMore } from "@material-ui/icons";
 import FriendRequestCard from "../friendRequestCard/FriendRequestCard";
 
 function RightSection() {
@@ -17,6 +17,10 @@ function RightSection() {
 
       setSuggestions(res.data);
     })();
+
+    return () => {
+      setSuggestions(null);
+    };
   }, [user]);
 
   return (

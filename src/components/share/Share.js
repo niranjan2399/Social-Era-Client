@@ -1,11 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
 import "./share.scss";
-import {
-  PhotoLibrary,
-  LocationOn,
-  EmojiEmotions,
-  Cancel,
-} from "@material-ui/icons";
+import { PhotoLibrary, Cancel } from "@material-ui/icons";
 import { AuthContext } from "../../authContext/AuthContext";
 import axios from "../../axios";
 
