@@ -212,63 +212,10 @@
         .request {
           max-height: 15rem;
           overflow-y: auto;
-
-          .user {
-            display: flex;
-            justify-content: space-between;
-            border-radius: 0.5rem;
-            align-items: center;
-            transition: all 200ms linear;
-
-            &:hover {
-              background-color: #40407a0e;
-            }
-
-            .main {
-              display: flex;
-              align-items: center;
-              padding: 0.25rem;
-              flex: 1;
-            }
-
-            .profilePic {
-              width: 3rem;
-              height: 3rem;
-              border-radius: 50%;
-              border: 1px solid #eeeeee;
-
-              img {
-                width: 100%;
-                object-fit: contain;
-              }
-            }
-
-            .name {
-              color: black;
-              flex: 1;
-              font-size: 0.85rem;
-              padding-left: 0.75rem;
-            }
-
-            .options {
-              display: flex;
-              padding-right: 0.25rem;
-
-              div {
-                border: 1px solid #eeeeee;
-                color: black;
-                padding: 0.25rem 0.5rem;
-                border-radius: 0.5rem;
-                font-size: 0.8rem;
-                background-color: white;
-
-                &:first-of-type {
-                  margin-right: 0.5rem;
-                }
-              }
-            }
-          }
         }
+      }
+      @media (max-width: 767px) {
+        display: none;
       }
     }
   }
@@ -289,10 +236,6 @@
       .more_options {
         visibility: visible;
       }
-    }
-
-    @media (max-width: 767px) {
-      display: none;
     }
 
     &:hover {
@@ -319,7 +262,7 @@
       top: 2.75rem;
       right: 0;
       width: 10rem;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       padding: 0.5rem;
       border-radius: 0.5rem;
       background-color: white;
@@ -331,12 +274,20 @@
         width: 100%;
 
         li {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           padding: 0.5rem;
-          text-align: center;
           border-radius: 0.5rem;
 
           &:hover {
             background-color: #eeeeee;
+          }
+
+          &.friendReq {
+            @media (min-width: 768px) {
+              display: none;
+            }
           }
         }
       }
@@ -365,5 +316,66 @@
 
   @media (min-width: 479px) {
     display: none;
+  }
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  align-items: center;
+  transition: all 200ms linear;
+
+  &.page {
+    background-color: #eeeeee;
+    cursor: pointer;
+  }
+
+  &:hover {
+    background-color: #40407a0e;
+  }
+
+  .main {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    flex: 1;
+  }
+
+  .profilePic {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid #eeeeee;
+
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .name {
+    color: black;
+    flex: 1;
+    font-size: 0.85rem;
+    padding-left: 0.75rem;
+  }
+
+  .options {
+    display: flex;
+    padding-right: 0.25rem;
+
+    div {
+      border: 1px solid #eeeeee;
+      color: black;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      background-color: white;
+
+      &:first-of-type {
+        margin-right: 0.5rem;
+      }
+    }
   }
 }

@@ -20,7 +20,7 @@ const CompleteProfile = () => {
   useEffect(() => {
     if (user && history.location.pathname.split("/")[1] === "edit-details") {
       setAvatar(user.profilePicture);
-      setDate(user.dob.split("T")[0]);
+      user.dob && setDate(user.dob.split("T")[0]);
       setCity(user.city);
       setRelation(user.relationship);
     }
@@ -47,7 +47,7 @@ const CompleteProfile = () => {
       });
 
       if (res.data) {
-        dispatch({ type: "LOGIN_START" });
+        dispatch({ type: "LOGOUT" });
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
         setLoading(false);
         if (history.location.pathname.split("/")[1] === "edit-details") {

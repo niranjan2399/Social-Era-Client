@@ -15,6 +15,26 @@
     border-radius: 0.5rem;
     box-shadow: 0 0 8rem #08080ebe;
 
+    @media (max-width: 47.9375rem) {
+      background-color: transparent;
+      box-shadow: none;
+      height: 32rem;
+      flex-direction: column;
+      align-items: center;
+
+      .left {
+        h1 {
+          color: white !important;
+          font-size: 1.35rem;
+          margin-bottom: 2rem !important;
+        }
+
+        p {
+          display: none;
+        }
+      }
+    }
+
     .left {
       display: flex;
       flex: 1.7;
@@ -98,6 +118,10 @@
       background-color: white;
       border-radius: 5px;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+      @media (max-width: 47.9375rem) {
+        width: 20rem;
+      }
 
       .tabs {
         position: relative;

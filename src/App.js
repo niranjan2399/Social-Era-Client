@@ -15,6 +15,7 @@ import Bookmarks from "./pages/bookmarks/Bookmarks";
 import EditPost from "./pages/editPost/EditPost";
 import CompleteProfile from "./pages/completeProfile/CompleteProfile";
 import axios from "./axios";
+import FriendRequest from "./pages/friendRequests/FriendRequest";
 
 function App() {
   const { user, dispatch } = useContext(AuthContext);
@@ -33,12 +34,12 @@ function App() {
           <Route
             path="/"
             exact
-            render={() => (user ? <Home /> : <LoginRegister login />)}
+            render={() => (user ? <Home /> : <Redirect to="/login" />)}
           />
           <Route
             path="/profile/:id"
             exact
-            render={() => (user ? <Profile /> : <LoginRegister login />)}
+            render={() => (user ? <Profile /> : <Redirect to="/login" />)}
           />
           <Route
             path="/register"
@@ -48,27 +49,36 @@ function App() {
           <Route
             path="/messenger"
             exact
-            render={() => (user ? <Messenger /> : <Redirect to="/" />)}
+            render={() => (user ? <Messenger /> : <Redirect to="/login" />)}
           />
           <Route
             path="/bookmarks"
             exact
-            render={() => (user ? <Bookmarks /> : <Redirect to="/" />)}
+            render={() => (user ? <Bookmarks /> : <Redirect to="/login" />)}
           />
           <Route
             path="/post/:id"
             exact
-            render={() => (user ? <EditPost /> : <Redirect to="/" />)}
+            render={() => (user ? <EditPost /> : <Redirect to="/login" />)}
+          />
+          <Route
+            path="/friend-requests"
+            exact
+            render={() => (user ? <FriendRequest /> : <Redirect to="/login" />)}
           />
           <Route
             path="/user-details/:id"
             exact
-            render={() => <CompleteProfile />}
+            render={() =>
+              user ? <CompleteProfile /> : <Redirect to="/login" />
+            }
           />
           <Route
             path="/edit-details/:id"
             exact
-            render={() => <CompleteProfile />}
+            render={() =>
+              user ? <CompleteProfile /> : <Redirect to="/login" />
+            }
           />
           <Route
             path="/login"

@@ -181,6 +181,17 @@ function Navbar() {
             <i className="lzf7d6o1"></i>
             <div className="more_options">
               <ul>
+                <li
+                  className="friendReq"
+                  onClick={() => history.push(`/friend-requests`)}
+                >
+                  <span>Friend Requests</span>
+                  <Badge
+                    badgeContent={user.friendRequests.length}
+                    color="secondary"
+                    style={{ marginRight: ".25rem" }}
+                  ></Badge>
+                </li>
                 <li onClick={handleLogout}>Log Out</li>
               </ul>
             </div>

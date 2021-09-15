@@ -1,0 +1,34 @@
+.frContainer {
+  display: grid;
+
+  grid-template-columns: 3fr 10fr;
+
+  @media (max-width: 1199px) {
+    grid-template-columns: 2fr 9fr;
+  }
+
+  @media (max-width: 1023px) {
+    grid-template-columns: 0.7fr 10fr;
+  }
+
+  @media (max-width: 859px) {
+    grid-template-columns: 1.75fr 15fr;
+  }
+
+  @media (max-width: 767px) {
+    margin-top: 2.623125rem;
+  }
+
+  @media (max-width: 479px) {
+    position: relative;
+    grid-template-columns: 1fr;
+  }
+
+  .frContainer__options {
+    padding: 2rem;
+
+    @media (max-width: 479px) {
+      padding: 1rem;
+    }
+  }
+}

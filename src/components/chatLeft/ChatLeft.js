@@ -105,7 +105,7 @@ function ChatLeft({
           <span>Start new Conversation</span>
         </button>
         <div className="friend_div">
-          {conversationFriends &&
+          {conversationFriends ? (
             conversationFriends.map((conversationData) => {
               return (
                 <div
@@ -152,7 +152,10 @@ function ChatLeft({
                   </div>
                 </div>
               );
-            })}
+            })
+          ) : (
+            <div className="err">Start Conversation To Chat</div>
+          )}
         </div>
         <div className="right_chat"></div>
         <div className="overlay">
