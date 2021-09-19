@@ -47,7 +47,6 @@ const CompleteProfile = () => {
       });
 
       if (res.data) {
-        dispatch({ type: "LOGOUT" });
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
         setLoading(false);
         if (history.location.pathname.split("/")[1] === "edit-details") {

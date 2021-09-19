@@ -1,6 +1,6 @@
 import {
   RssFeed,
-  PlayCircleFilled,
+  PersonAdd,
   Chat,
   Bookmark,
   Help,
@@ -21,8 +21,8 @@ const data = [
     text: "Chat",
   },
   {
-    logo: PlayCircleFilled,
-    text: "Videos",
+    logo: PersonAdd,
+    text: "Add Friends",
   },
   {
     logo: Help,

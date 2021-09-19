@@ -16,6 +16,7 @@ import EditPost from "./pages/editPost/EditPost";
 import CompleteProfile from "./pages/completeProfile/CompleteProfile";
 import axios from "./axios";
 import FriendRequest from "./pages/friendRequests/FriendRequest";
+import SearchFriends from "./pages/searchFriends/SearchFriends";
 
 function App() {
   const { user, dispatch } = useContext(AuthContext);
@@ -65,6 +66,11 @@ function App() {
             path="/friend-requests"
             exact
             render={() => (user ? <FriendRequest /> : <Redirect to="/login" />)}
+          />
+          <Route
+            path="/search-friends"
+            exact
+            render={() => (user ? <SearchFriends /> : <Redirect to="/login" />)}
           />
           <Route
             path="/user-details/:id"

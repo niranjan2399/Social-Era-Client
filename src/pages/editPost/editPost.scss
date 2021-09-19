@@ -10,21 +10,24 @@
   }
 
   @media (max-width: 1023px) {
-    grid-template-columns: 0.25fr 9fr;
+    grid-template-columns: 0.7fr 10fr;
+  }
+
+  @media (max-width: 859px) {
+    grid-template-columns: 1.75fr 15fr;
   }
 
   @media (max-width: 767px) {
-    grid-template-columns: 1fr 15fr;
     margin-top: 2.623125rem;
   }
 
   @media (max-width: 479px) {
+    position: relative;
     grid-template-columns: 1fr;
   }
 
   .editPost__main {
     padding: 1.5rem 2.25rem;
-    width: 100%;
 
     h2 {
       padding-bottom: 1rem;
@@ -56,8 +59,8 @@
         align-items: center;
         justify-content: center;
         margin-top: 2.5rem;
-        width: 30rem;
-        height: 18rem;
+        max-width: 30rem;
+        max-height: 18rem;
         font-size: 0.8rem;
         border: 1px solid #eeeeee;
 

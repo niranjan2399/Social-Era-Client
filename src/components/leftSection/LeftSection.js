@@ -47,6 +47,17 @@ function LeftSection() {
               <list.logo />
               <span>{list.text}</span>
             </NavLink>
+          ) : list.text === "Add Friends" ? (
+            <NavLink
+              to="/search-friends"
+              exact
+              key={i}
+              className="tag link_tag"
+              activeStyle={{ backgroundColor: "#2C2C54" }}
+            >
+              <list.logo />
+              <span>{list.text}</span>
+            </NavLink>
           ) : (
             <div key={i} className="tag">
               <list.logo />
