@@ -116,7 +116,7 @@ const EditPost = () => {
                       </div>
                     </>
                   ) : (
-                    <div>
+                    <div className='noImg'>
                       <div> Please Upload Image To Preview</div>
                       <div className="editPost__noImg">
                         <label className="button button--noImg" htmlFor="file2">

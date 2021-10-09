@@ -48,6 +48,7 @@ function RightSection() {
               <button className="button">
                 Show more <ExpandMore style={{ marginLeft: ".25rem" }} />
               </button>
+              {/* {!suggestions.length && <p>No more suggestions</p>} */}
             </div>
           )}
         </div>

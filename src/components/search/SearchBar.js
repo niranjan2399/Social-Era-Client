@@ -24,7 +24,7 @@ function SearchBar() {
       </div>
       <input
         type="search"
-        placeholder="Search for a friend"
+        placeholder="Search user by Name, Email"
         value={text}
         onChange={handleChange}
       />

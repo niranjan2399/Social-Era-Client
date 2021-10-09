@@ -76,7 +76,9 @@ const FriendRequestCard = ({ user }) => {
         data-friend_id={user._id}
         onClick={handleFriendRequest}
       >
-        {sendRequest ? (
+        {user && currentUser && currentUser.friends.includes(user._id) ? (
+          <div className="isFriend">Already Friend</div>
+        ) : sendRequest ? (
           <Tooltip title="Already Sent" placement="top">
             <IconButton style={{ width: "2.75rem", height: "2.75rem" }}>
               <CheckCircleOutline />
