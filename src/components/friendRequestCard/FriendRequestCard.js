@@ -17,6 +17,10 @@ const FriendRequestCard = ({ user }) => {
       setSendRequest(
         user.friendRequests.includes(currentUser._id) ? true : false
       );
+
+    return () => {
+      setSendRequest(null);
+    };
   }, [currentUser, user]);
 
   const handleFriendRequest = async (e) => {

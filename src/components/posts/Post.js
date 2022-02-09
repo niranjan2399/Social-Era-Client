@@ -9,7 +9,7 @@ import {
   FavoriteBorder,
   // Comment,
 } from "@material-ui/icons";
-import { IconButton } from "@material-ui/core";
+import { CircularProgress, IconButton } from "@material-ui/core";
 import axios from "../../axios";
 import moment from "moment";
 import { AuthContext } from "../../authContext/AuthContext";
@@ -24,6 +24,7 @@ function Post({ post, setPosts }) {
     currentUser && currentUser.bookmarks.includes(post._id)
   );
   const history = useHistory();
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     if (post) {
@@ -32,6 +33,12 @@ function Post({ post, setPosts }) {
         : setIsLiked(false);
       setLikes(post.likes.length);
     }
+
+    return () => {
+      setLikes(null);
+      setIsLiked(null);
+      setBookmarked(null);
+    };
   }, [post, currentUser]);
 
   const likeHandler = () => {
@@ -43,10 +50,12 @@ function Post({ post, setPosts }) {
   };
 
   const deletePost = async () => {
+    setDeleting(true);
     await axios.delete(`/posts/${post._id}`, {
       data: { userId: currentUser._id },
     });
     setPosts((p) => p.filter((doc) => doc._id !== post._id));
+    setDeleting(false);
   };
 
   const handleBookmark = async () => {
@@ -116,18 +125,31 @@ function Post({ post, setPosts }) {
                 >
                   <Edit className="rightIcon" />
                 </IconButton>
-                <IconButton
-                  color="inherit"
-                  style={{ width: "2.25rem", height: "2.25rem" }}
-                  onClick={deletePost}
-                >
-                  <Delete
-                    className="rightIcon"
-                    style={{
-                      color: "#d63031",
-                    }}
-                  />
-                </IconButton>
+                {deleting ? (
+                  <div className="progress_container">
+                    <CircularProgress
+                      style={{
+                        color: "#d63031",
+                        width: "1.35rem",
+                        height: "1.35rem",
+                        marginBlock: "auto",
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <IconButton
+                    color="inherit"
+                    style={{ width: "2.25rem", height: "2.25rem" }}
+                    onClick={deletePost}
+                  >
+                    <Delete
+                      className="rightIcon"
+                      style={{
+                        color: "#d63031",
+                      }}
+                    />
+                  </IconButton>
+                )}
               </div>
             )}
           </div>

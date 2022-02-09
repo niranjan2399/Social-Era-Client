@@ -3,14 +3,17 @@ import "./share.scss";
 import { PhotoLibrary, Cancel } from "@material-ui/icons";
 import { AuthContext } from "../../authContext/AuthContext";
 import axios from "../../axios";
+import { CircularProgress } from "@material-ui/core";
 
 function Share({ setPosts }) {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const desc = useRef(null);
   const [file, setFile] = useState(null);
+  const [sharing, setSharing] = useState(false);
 
   const handleShare = async (e) => {
+    setSharing(true);
     e.preventDefault();
     if (desc.current.value !== "" || file !== null) {
       const newPost = {
@@ -43,6 +46,8 @@ function Share({ setPosts }) {
         console.log(err);
       }
     }
+
+    setSharing(false);
   };
 
   return (
@@ -88,7 +93,15 @@ function Share({ setPosts }) {
             />
           </label>
         </div>
-        <button type="submit">Share</button>
+        <button type="submit" {...sharing && { style: {pointerEvents: 'none'}}}>
+          {sharing ? (
+            <CircularProgress
+              style={{ color: "white", width: "1.25rem", height: "1.25rem" }}
+            />
+          ) : (
+            "Share"
+          )}
+        </button>
       </form>
     </div>
   );
