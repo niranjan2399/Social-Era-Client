@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import LeftSection from "../../components/leftSection/LeftSection";
 import Feed from "../../components/feed/Feed";
 import RightSection from "../../components/rightSection/RightSection";
