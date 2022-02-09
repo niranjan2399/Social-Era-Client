@@ -4,8 +4,7 @@ import { AuthContext } from "../../authContext/AuthContext";
 import axios from "../../axios";
 import moment from "moment";
 import { friendOfUser } from "../../utils/friendOfUser";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { CircularProgress } from "@material-ui/core";
 
 function ChatBox({
   fetchedMessages,
@@ -20,7 +19,7 @@ function ChatBox({
   const intoView = useRef();
 
   useEffect(() => {
-    socket.current.on("getMessage", (data) => {
+    socket.on("getMessage", (data) => {
       setArrivalMessage({
         senderId: data.senderId,
         message: data.text,
@@ -30,7 +29,8 @@ function ChatBox({
   }, [socket]);
 
   useEffect(() => {
-    const convFriendId = friendOfUser(conversations, user, fetchedMessages);
+    const convFriendId =
+      fetchedMessages && friendOfUser(conversations, user, fetchedMessages);
 
     arrivalMessage &&
       convFriendId === arrivalMessage.senderId &&
@@ -50,7 +50,7 @@ function ChatBox({
 
   useEffect(() => {
     intoView.current?.scrollIntoView({ behavior: "smooth" });
-  }, [fetchedMessages.messages]);
+  }, [fetchedMessages]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -73,7 +73,7 @@ function ChatBox({
 
     const receiverId = friendOfUser(conversations, user, fetchedMessages);
 
-    socket.current.emit("sendMessage", {
+    socket.emit("sendMessage", {
       senderId: user._id,
       receiverId,
       text: toSendMessage,
@@ -83,50 +83,57 @@ function ChatBox({
   return (
     <div className="chatDiv">
       <div className="chat">
-        <div className="chat_top">
-          <div className="back">
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </div>
-          <picture></picture>
-          <div>
-            <span></span>
-          </div>
-        </div>
-        {fetchedMessages.messages.map((message, i) => {
-          return message.senderId !== user._id ? (
-            <div
-              ref={intoView}
-              className="messageContainer friends_message"
-              key={i}
-            >
-              <picture className="profilePicture">
-                <img src={PF + "noProfilePic.png"} alt="" />
-              </picture>
-              <div>
-                <div className="message">
-                  <p>{message.message}</p>
+        {fetchedMessages ? (
+          fetchedMessages.messages.length > 0 ? (
+            fetchedMessages.messages.map((message, i) => {
+              return message.senderId !== user._id ? (
+                <div
+                  ref={intoView}
+                  className="messageContainer friends_message"
+                  key={i}
+                >
+                  <picture className="profilePicture">
+                    <img src={PF + "noProfilePic.png"} alt="" />
+                  </picture>
+                  <div>
+                    <div className="message">
+                      <p>{message.message}</p>
+                    </div>
+                    <span>{moment(message.time).fromNow()}</span>
+                  </div>
                 </div>
-                <span>{moment(message.time).fromNow()}</span>
-              </div>
-            </div>
+              ) : (
+                <div
+                  ref={intoView}
+                  className="messageContainer own_message"
+                  key={message.time}
+                >
+                  <picture className="profilePicture">
+                    <img src={PF + "noProfilePic.png"} alt="" />
+                  </picture>
+                  <div>
+                    <div className="message">
+                      <p>{message.message}</p>
+                    </div>
+                    <span>{moment(message.time).fromNow()}</span>
+                  </div>
+                </div>
+              );
+            })
           ) : (
-            <div
-              ref={intoView}
-              className="messageContainer own_message"
-              key={message.time}
-            >
-              <picture className="profilePicture">
-                <img src={PF + "noProfilePic.png"} alt="" />
-              </picture>
-              <div>
-                <div className="message">
-                  <p>{message.message}</p>
-                </div>
-                <span>{moment(message.time).fromNow()}</span>
-              </div>
-            </div>
-          );
-        })}
+            <div className="info">No Previous Messages Found<br /> Say Hello ✋</div>
+          )
+        ) : (
+          <CircularProgress
+            style={{
+              width: "2rem",
+              height: "2rem",
+              color: "#40407a",
+              display: "flex",
+              margin: "5rem auto",
+            }}
+          />
+        )}
         <div ref={intoView}></div>
       </div>
       <div className="chatMessage_send">

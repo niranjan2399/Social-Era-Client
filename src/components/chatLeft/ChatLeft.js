@@ -6,6 +6,8 @@ import { Close } from "@material-ui/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import LeftSection from "../../components/leftSection/LeftSection";
+import { Link } from "react-router-dom";
+import { CircularProgress } from "@material-ui/core";
 
 function ChatLeft({
   setConversations,
@@ -16,6 +18,8 @@ function ChatLeft({
   setFetchedMessages,
   fetchedMessages,
   windowWidth,
+  setShowChat,
+  onlineFriends,
 }) {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -81,6 +85,7 @@ function ChatLeft({
   };
 
   const toggleFetchMessage = async (e) => {
+    setShowChat(true);
     const friend_conv = conversations.find((conv) => {
       return conv.member.includes(e.currentTarget.dataset.selector);
     });
@@ -104,59 +109,91 @@ function ChatLeft({
           <FontAwesomeIcon icon={faPlusCircle} className="icon" />
           <span>Start new Conversation</span>
         </button>
-        <div className="friend_div">
-          {conversationFriends ? (
-            conversationFriends.map((conversationData) => {
-              return (
-                <div
-                  className="friend"
-                  key={conversationData._id}
-                  {...(windowWidth <= 767 && { onClick: showChat })}
-                >
+        {conversationFriends ? (
+          <div className="friend_div">
+            {conversationFriends.length ? (
+              conversationFriends.map((conversationData) => {
+                return (
                   <div
-                    className="friend_conversation"
-                    data-selector={conversationData._id}
-                    onClick={toggleFetchMessage}
+                    className="friend"
+                    key={conversationData._id}
+                    {...(windowWidth <= 767 && { onClick: showChat })}
                   >
-                    <div className="picture_friend">
-                      {" "}
-                      <img
-                        src={
-                          conversationData.profilePicture
-                            ? PF + conversationData.profilePicture
-                            : PF + "noProfilePic.png"
-                        }
-                        alt=""
-                      />
+                    <div
+                      className="friend_conversation"
+                      data-selector={conversationData._id}
+                      onClick={toggleFetchMessage}
+                    >
+                      <div className="picture_friend">
+                        {" "}
+                        <img
+                          src={
+                            conversationData.profilePicture
+                              ? PF + conversationData.profilePicture
+                              : PF + "noProfilePic.png"
+                          }
+                          alt=""
+                        />
+                      </div>
+                      <div className="details">
+                        <div className="friend_name">
+                          <Link
+                            to={`/profile/${conversationData._id}`}
+                            style={{ color: "black" }}
+                          >
+                            {conversationData.firstName +
+                              " " +
+                              conversationData.lastName}
+                          </Link>
+                        </div>
+                        <div className="friend_status">
+                          <div
+                            className={
+                              onlineFriends &&
+                              onlineFriends.find(
+                                (friend) =>
+                                  friend.userId === conversationData._id
+                              )
+                                ? "indicator green"
+                                : "indicator red"
+                            }
+                          ></div>
+                          <span className="text">
+                            {onlineFriends && onlineFriends.find(
+                              (friend) => friend.userId === conversationData._id
+                            )
+                              ? "Online"
+                              : "Offline"}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                    <div className="details">
-                      <div className="friend_name">
-                        <span>
-                          {conversationData.firstName +
-                            " " +
-                            conversationData.lastName}
-                        </span>
-                      </div>
-                      <div className="friend_status">
-                        <div className="indicator"></div>
-                        <span className="text">Online</span>
-                      </div>
+                    <div
+                      className="delete"
+                      data-selector={conversationData._id}
+                      onClick={deleteConversation}
+                    >
+                      <FontAwesomeIcon icon={faTrashAlt} className="icon" />
                     </div>
                   </div>
-                  <div
-                    className="delete"
-                    data-selector={conversationData._id}
-                    onClick={deleteConversation}
-                  >
-                    <FontAwesomeIcon icon={faTrashAlt} className="icon" />
-                  </div>
-                </div>
-              );
-            })
-          ) : (
-            <div className="err">Start Conversation To Chat</div>
-          )}
-        </div>
+                );
+              })
+            ) : (
+              <div className="err">Start Conversation To Chat</div>
+            )}
+          </div>
+        ) : (
+          <CircularProgress
+            style={{
+              width: "2rem",
+              height: "2rem",
+              color: "#40407a",
+              display: "flex",
+              marginInline: "auto",
+              marginTop: "3rem",
+            }}
+          />
+        )}
         <div className="right_chat"></div>
         <div className="overlay">
           <div className="friends_overlay">

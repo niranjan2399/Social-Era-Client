@@ -7,9 +7,10 @@ import { CircularProgress } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import FriendRequestCard from "../friendRequestCard/FriendRequestCard";
 
-function RightSection() {
+function RightSection({ data }) {
   const [suggestions, setSuggestions] = useState(null);
   const { user } = useContext(AuthContext);
+  const [online, setOnline] = useState();
 
   useEffect(() => {
     (async () => {
@@ -23,9 +24,19 @@ function RightSection() {
     };
   }, [user]);
 
+  useEffect(() => {
+    if (data) {
+      setOnline(data);
+    }
+
+    return () => {
+      setOnline(null);
+    };
+  }, [data]);
+
   return (
     <div className="right_section">
-      <Online />
+      <Online data={online} />
       <div className="right_section__suggestions">
         <span className="suggestions__Title">Friend Suggestions</span>
         <div className="suggestion__main">

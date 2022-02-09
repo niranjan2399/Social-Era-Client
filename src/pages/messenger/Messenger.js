@@ -6,31 +6,43 @@ import ChatLeft from "../../components/chatLeft/ChatLeft";
 import Navbar from "../../components/navbar/Navbar";
 import { fetchFriends } from "../../utils/friends";
 import "./messenger.scss";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 
-function Messenger() {
+function Messenger({ socket }) {
   const [conversations, setConversations] = useState([]);
-  const [convFriends, setConvFriends] = useState([]);
+  const [convFriends, setConvFriends] = useState();
   const [friends, setFriends] = useState([]);
   const { user } = useContext(AuthContext);
   const [fetchedMessages, setFetchedMessages] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const socket = useRef();
+  const [showChat, setShowChat] = useState(false);
+  const [onlineFriends, setOnlineFriends] = useState(null);
+  // const socket = useRef();
 
+  // useEffect(() => {
+  //   socket.current = io(process.env.SOCKET_ADDRESS, {
+  //     reconnection: true,
+  //     reconnectionDelay: 1000,
+  //     maxReconnectionAttempts: Infinity,
+  //   });
+  // }, []);
+  
   useEffect(() => {
-    socket.current = io("ws://localhost:8000", {
-      reconnection: true,
-      reconnectionDelay: 1000,
-      maxReconnectionAttempts: Infinity,
-    });
-  }, []);
+    // socket.current.emit("addUser", user._id);
+    console.log("asdf");
+    socket &&
+      socket.emit("getOnlineUsers", (data) => {
+        console.log(data);
+      });
+    // socket.on("getUsers", (data) => {
+    //   console.log(data);
+    //   setOnlineFriends(data);
+    // });
 
-  useEffect(() => {
-    socket.current.emit("addUser", user._id);
-    socket.current.on("getUsers", (data) => {
-      console.log(data);
-    });
-  }, [user]);
+    return () => {
+      setOnlineFriends(null);
+    };
+  }, [socket]);
 
   useEffect(() => {
     (async () => {
@@ -118,8 +130,10 @@ function Messenger() {
           setFetchedMessages={setFetchedMessages}
           friends={friends}
           windowWidth={windowWidth}
+          setShowChat={setShowChat}
+          onlineFriends={onlineFriends}
         />
-        {fetchedMessages ? (
+        {showChat ? (
           <ChatBox
             fetchedMessages={fetchedMessages}
             setFetchedMessages={setFetchedMessages}

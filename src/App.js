@@ -9,7 +9,7 @@ import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import LoginRegister from "./pages/LoginRegister/LoginRegister";
 import { AuthContext } from "./authContext/AuthContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Messenger from "./pages/messenger/Messenger";
 import Bookmarks from "./pages/bookmarks/Bookmarks";
 import EditPost from "./pages/editPost/EditPost";
@@ -17,9 +17,37 @@ import CompleteProfile from "./pages/completeProfile/CompleteProfile";
 import axios from "./axios";
 import FriendRequest from "./pages/friendRequests/FriendRequest";
 import SearchFriends from "./pages/searchFriends/SearchFriends";
+import Chat from "./pages/chat/Chat";
+import { io } from "socket.io-client";
 
 function App() {
   const { user, dispatch } = useContext(AuthContext);
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    user &&
+      (() => {
+        const newSocket = io(
+          "wss://social-era-socket.herokuapp.com",
+          // "ws://localhost:8000",
+          {
+            reconnection: true,
+            reconnectionDelay: 1000,
+            maxReconnectionAttempts: Infinity,
+          }
+        );
+
+        setSocket(newSocket);
+      })();
+
+    return () => setSocket(null);
+  }, [user]);
+
+  useEffect(() => {
+    if (socket && user) {
+      socket.emit("addUser", user._id);
+    }
+  }, [socket, user]);
 
   useEffect(() => {
     (async () => {
@@ -35,7 +63,9 @@ function App() {
           <Route
             path="/"
             exact
-            render={() => (user ? <Home /> : <Redirect to="/login" />)}
+            render={() =>
+              user ? <Home socket={socket} /> : <Redirect to="/login" />
+            }
           />
           <Route
             path="/profile/:id"
@@ -50,8 +80,15 @@ function App() {
           <Route
             path="/messenger"
             exact
-            render={() => (user ? <Messenger /> : <Redirect to="/login" />)}
+            render={() =>
+              user ? <Messenger socket={socket} /> : <Redirect to="/login" />
+            }
           />
+          {/* <Route
+            path="/messenger/:id"
+            exact
+            render={() => (user ? <Chat /> : <Redirect to="/login" />)}
+          /> */}
           <Route
             path="/bookmarks"
             exact

@@ -32,6 +32,10 @@
     .reveal_friends {
       margin-right: 1rem;
       transition: all 200ms cubic-bezier(1, 0, 0, 1);
+
+      &.reveal {
+        transform: rotateZ(180deg);
+      }
     }
   }
 
@@ -39,26 +43,38 @@
     background-color: white;
     border-radius: 5px;
     color: black;
-    max-height: 0;
+    height: 0;
     overflow-y: auto;
     margin-inline: 0.2rem;
     transition: all 200ms ease-in;
+
+    &.reveal {
+      height: 16rem;
+    }
 
     &:last-of-type {
       border-top-right-radius: 5px;
       border-top-left-radius: 5px;
     }
 
+    &--empty {
+      text-align: center;
+      padding-block: 0.75rem;
+    }
+
     .friend_div {
       display: flex;
       align-items: center;
-      padding-block: 0.6rem;
-      padding-inline: 0.8rem;
+      padding-block: 0.7rem;
+      margin: 0.25rem;
+      padding-inline: 1rem;
+      transition: all 200ms linear;
 
-      // &:hover {
-      //   background-color: #f5ebd4;
-      //   border-radius: 5px;
-      // }
+      &:hover {
+        background-color: #40407a25;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
       .profile_pic {
         position: relative;
@@ -68,6 +84,11 @@
           border-radius: 50%;
           margin-right: 0.5rem;
           background-color: #2c2c54;
+
+          img {
+            width: 100%;
+            object-fit: contain;
+          }
         }
 
         .indicator {

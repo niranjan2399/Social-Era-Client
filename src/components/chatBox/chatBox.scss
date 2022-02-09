@@ -4,6 +4,7 @@
   flex-direction: column;
   background-color: #f5f7fa;
   height: 100%;
+  background-color: #bebebeda;
 
   @media (min-width: 1024px) {
     flex: 2;
@@ -84,6 +85,14 @@
           margin-top: 0.2rem;
         }
       }
+    }
+
+    .info {
+      display: block;
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.75rem;
+      padding: 1rem;
     }
   }
 

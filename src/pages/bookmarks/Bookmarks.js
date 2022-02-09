@@ -19,11 +19,11 @@ const Bookmarks = () => {
       } catch (err) {
         console.log(err);
       }
-
-      return () => {
-        setPosts(null);
-      };
     })();
+
+    return () => {
+      setPosts(null);
+    };
   }, [user]);
 
   return (

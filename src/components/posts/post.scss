@@ -1,8 +1,9 @@
 .post {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   border: 2px solid #ddd;
   border-radius: 0.5rem;
-  padding: 0.75rem 1rem 0.5rem 1rem;
+  // padding: 0.75rem 1rem 0.5rem 1rem;
+  padding-block: 0.75rem;
   background-color: white;
 
   .overlay {
@@ -30,6 +31,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-inline: 0.75rem;
 
     .left {
       display: flex;
@@ -42,8 +44,8 @@
         color: #2c2c54;
 
         .profilePic {
-          width: 2rem;
-          height: 2rem;
+          width: 2.5rem;
+          height: 2.5rem;
           border-radius: 50%;
           margin-right: 0.5rem;
           overflow: hidden;
@@ -55,15 +57,25 @@
         }
       }
 
+      .postDetails {
+        .time {
+          display: block;
+          font-size: 0.7rem;
+        }
+      }
+
       .username {
+        color: black;
         font-size: 0.875rem;
-        margin-right: 0.6rem;
-        font-weight: 600;
+        font-weight: 500;
         cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
 
       .time {
-        font-size: 0.75rem;
         color: rgb(85, 84, 84);
       }
     }
@@ -85,8 +97,11 @@
     flex-direction: column;
     margin-top: 1rem;
     font-size: 0.85rem;
+
     .text {
-      margin-bottom: 1rem;
+      margin-bottom: 0.125rem;
+      padding-inline: 1rem;
+      font-size: 0.8rem;
     }
 
     .postImage {
@@ -105,40 +120,63 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
 
     .left {
       display: flex;
       align-content: center;
       margin-left: 0.5rem;
 
-      .thumbUp {
+      .likeContainer {
+        display: flex;
+        align-items: center;
+        border: 1px solid #d8d6d6;
+        border-radius: 0.5rem;
+        padding: 0.125rem 0.75rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #d8d6d6;
+        }
+      }
+
+      .fav {
         font-size: 1.25rem;
         margin-right: 0.5rem;
-        color: blue;
+        color: #ff5959;
 
         &:hover {
           transform: scale(1.1);
-          filter: drop-shadow(0 2px 2px blue);
-          cursor: pointer;
-        }
-      }
-      .like {
-        font-size: 1.25rem;
-        color: red;
-        &:hover {
-          filter: drop-shadow(0 2px 2px red);
-          transform: scale(1.1);
+          filter: drop-shadow(0 2px 2px #ff5959);
           cursor: pointer;
         }
       }
 
-      .likeMessage {
-        margin-left: 0.5rem;
+      .commentI {
+        display: flex;
+        margin-left: 0.75rem;
+        align-items: center;
+        border: 1px solid #d8d6d6;
+        border-radius: 0.5rem;
+        padding: 0.125rem 0.75rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #d8d6d6;
+        }
+
+        .commentIcon {
+          color: #757575;
+        }
+
+        span {
+          font-size: 0.7rem;
+          margin-left: 0.5rem;
+        }
       }
 
       span {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
       }
     }
     .right {
@@ -148,7 +186,45 @@
 
       .icon {
         color: #4b4b4a;
+        font-size: 1.25rem;
         cursor: pointer;
+      }
+    }
+  }
+
+  .comments {
+    margin-inline: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.35rem;
+
+    .commentBox {
+      display: flex;
+      align-items: center;
+
+      .userImage {
+        width: 2rem;
+        height: 2rem;
+        overflow: hidden;
+        margin-right: 0.5rem;
+
+        img {
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+
+      input {
+        border: none;
+        width: 100%;
+        padding-block: 0.5rem;
+        padding-inline: 1rem;
+        border-radius: 1rem;
+        background-color: white;
+        background-color: #e8eef7;
+
+        &:focus {
+          outline: none;
+        }
       }
     }
   }

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import "./navBar.scss";
 import SearchBar from "../search/SearchBar";
-import { Home, People, Warning } from "@material-ui/icons";
+import { Home, People, Warning,ExpandMore, ExitToApp } from "@material-ui/icons";
 import { AuthContext } from "../../authContext/AuthContext";
 import { Badge } from "@material-ui/core";
 import { removeRequest, addFriend } from "../../utils/friends";
@@ -178,7 +178,7 @@ function Navbar() {
             </div>
           </div>
           <div className="more" tabIndex="0">
-            <i className="lzf7d6o1"></i>
+            <ExpandMore />
             <div className="more_options">
               <ul>
                 <li
@@ -192,7 +192,7 @@ function Navbar() {
                     style={{ marginRight: ".25rem" }}
                   ></Badge>
                 </li>
-                <li onClick={handleLogout}>Log Out</li>
+                <li onClick={handleLogout}>Log Out<ExitToApp /></li>
               </ul>
             </div>
           </div>

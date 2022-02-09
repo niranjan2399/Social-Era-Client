@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./post.scss";
 import {
-  ThumbUpAltOutlined,
-  ThumbUpAlt,
   Edit,
   Delete,
   Bookmark,
   BookmarkBorder,
+  Favorite,
+  FavoriteBorder,
+  Comment,
 } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import axios from "../../axios";
@@ -91,11 +92,18 @@ function Post({ post, setPosts }) {
                     alt=""
                   />
                 </div>
-                <span className="username">
-                  {post.userId.firstName + " " + post.userId.lastName}
-                </span>
               </Link>
-              <span className="time">{moment(post.createdAt).fromNow()}</span>
+              <div className="postDetails">
+                <Link
+                  to={`/profile/${post.userId._id}`}
+                  className="user_profile"
+                >
+                  <span className="username">
+                    {post.userId.firstName + " " + post.userId.lastName}
+                  </span>
+                </Link>
+                <span className="time">{moment(post.createdAt).fromNow()}</span>
+              </div>
             </div>
             {((history.location.pathname !== "/bookmarks" &&
               post.userId._id === currentUser._id) ||
@@ -133,12 +141,18 @@ function Post({ post, setPosts }) {
           </div>
           <div className="bottom">
             <div className="left">
-              {isLiked ? (
-                <ThumbUpAlt className="thumbUp" onClick={likeHandler} />
-              ) : (
-                <ThumbUpAltOutlined className="thumbUp" onClick={likeHandler} />
-              )}
-              <span className="likeMessage">{likes} people liked it</span>
+              <div className="likeContainer" onClick={likeHandler}>
+                {isLiked ? (
+                  <Favorite className="fav" />
+                ) : (
+                  <FavoriteBorder className="fav" />
+                )}
+                <span className="likeMessage">{likes} likes</span>
+              </div>
+              {/* <div className="commentI">
+                <Comment className="commentIcon" />
+                <span>0</span>
+              </div> */}
             </div>
             <div className="right">
               <IconButton
@@ -153,6 +167,21 @@ function Post({ post, setPosts }) {
               </IconButton>
             </div>
           </div>
+          {/* <div className="comments">
+            <div className="commentBox">
+              <div className="userImage">
+                <img
+                  src={
+                    currentUser.profilePicture
+                      ? PF + currentUser.profilePicture
+                      : PF + "noProfilePic.png"
+                  }
+                  alt=""
+                />
+              </div>
+              <input type="text" placeholder="Add a comment..." />
+            </div>
+          </div> */}
         </>
       )}
     </div>
