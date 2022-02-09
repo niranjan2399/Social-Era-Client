@@ -7,7 +7,7 @@ import {
   BookmarkBorder,
   Favorite,
   FavoriteBorder,
-  Comment,
+  // Comment,
 } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import axios from "../../axios";

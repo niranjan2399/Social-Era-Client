@@ -17,7 +17,7 @@ import CompleteProfile from "./pages/completeProfile/CompleteProfile";
 import axios from "./axios";
 import FriendRequest from "./pages/friendRequests/FriendRequest";
 import SearchFriends from "./pages/searchFriends/SearchFriends";
-import Chat from "./pages/chat/Chat";
+// import Chat from "./pages/chat/Chat";
 import { io } from "socket.io-client";
 
 function App() {

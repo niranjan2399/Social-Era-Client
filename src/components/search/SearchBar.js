@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext} from "react";
 import { Search } from "@material-ui/icons";
 import "./search.scss";
 import { useHistory } from "react-router-dom";

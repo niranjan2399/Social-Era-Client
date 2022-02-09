@@ -1,5 +1,5 @@
 import axios from "../../axios";
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../authContext/AuthContext";
 import ChatBox from "../../components/chatBox/ChatBox";
 import ChatLeft from "../../components/chatLeft/ChatLeft";
@@ -26,7 +26,7 @@ function Messenger({ socket }) {
   //     maxReconnectionAttempts: Infinity,
   //   });
   // }, []);
-  
+
   useEffect(() => {
     // socket.current.emit("addUser", user._id);
     console.log("asdf");
