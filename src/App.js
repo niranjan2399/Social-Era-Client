@@ -5,7 +5,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import Home from "./pages/home/Home";
+import Home from "./pages/Home/Home";
 import Profile from "./pages/profile/Profile";
 import LoginRegister from "./pages/LoginRegister/LoginRegister";
 import { AuthContext } from "./authContext/AuthContext";
